@@ -13,7 +13,7 @@ namespace OpenXMLTools
             this._fields = fields;
         }
 
-        public IEnumerable<StationTable> GroupMeasurementsIntoWeeks()
+        public IEnumerable<StationTable> GroupMeasurementsIntoStationTables()
         {
             List<StationTable> stationMeasurements = new List<StationTable>();
 
@@ -48,7 +48,7 @@ namespace OpenXMLTools
 
         public List<RecordByWeek> GetRecordsByWeek()
         {
-            var queryByStation = GroupMeasurementsIntoWeeks();
+            var queryByStation = GroupMeasurementsIntoStationTables();
             var weekIndexes = GetUniqueWeekIndices();
 
             List<RecordByWeek> weeklyRates = new List<RecordByWeek>();
@@ -79,7 +79,7 @@ namespace OpenXMLTools
         public List<RecordByStation> GetRecordsByStation()
         {
             var weeks = GetUniqueWeekIndices();
-            var stationGrouping = GroupMeasurementsIntoWeeks();
+            var stationGrouping = GroupMeasurementsIntoStationTables();
             List<RecordByStation> stationRecords = new List<RecordByStation>();
 
             foreach (var week in weeks)

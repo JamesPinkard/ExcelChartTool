@@ -27,20 +27,22 @@ namespace OpenXMLTools
             _helper = new SpreadsheetHelper(_spreadsheetDocument);
         }
 
-        public WeeklyQueryFactory MakeWorksheetQuery(string sheetName)
+        public WorksheetQuery MakeWorksheetQuery(string sheetName)
         {            
-            Worksheet worksheet = Helper.GetWorksheet(sheetName);
             FieldParserFactory parserFactory = new FieldParserFactory(_sharedStringList);
             IFieldParser parser = parserFactory.MakeParser();
+
+            Worksheet worksheet = Helper.GetWorksheet(sheetName);
             IEnumerable<Row> rows = worksheet.Descendants<Row>();
+
             IEnumerable<MountainViewField> fields = parser.Parse(rows);
-            WeeklyQueryFactory factory = MakeFactory(fields);
-            return factory;
+            WorksheetQuery query = MakeQuery(fields);
+            return query;
         }
 
-        private WeeklyQueryFactory MakeFactory(IEnumerable<MountainViewField> fields)
+        private WorksheetQuery MakeQuery(IEnumerable<MountainViewField> fields)
         {
-            return new WeeklyQueryFactory(fields);
+            return new WorksheetQuery(fields);
         }
 
         public SpreadsheetHelper Helper

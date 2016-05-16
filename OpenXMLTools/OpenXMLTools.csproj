@@ -49,7 +49,6 @@
     <Compile Include="CellParser.cs" />
     <Compile Include="CellReference.cs" />
     <Compile Include="ChartInserter.cs" />
-    <Compile Include="Records\CumulativeRecord.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="RecordWriter.cs" />
@@ -65,14 +64,13 @@
     <Compile Include="RecordProvider.cs" />
     <Compile Include="SpreadsheetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Records\StationRecord.cs" />
+    <Compile Include="Records\RecordByStation.cs" />
     <Compile Include="StationRecordQuery.cs" />
     <Compile Include="StationTable.cs" />
     <Compile Include="RowParser\ThreeColumnRowParser.cs" />
-    <Compile Include="WeeklyQueryFactory.cs" />
-    <Compile Include="Records\WeekRateRecord.cs" />
-    <Compile Include="WorkbookWriter.cs" />
     <Compile Include="WorksheetQuery.cs" />
+    <Compile Include="Records\RecordByWeek.cs" />
+    <Compile Include="WorkbookWriter.cs" />
     <Compile Include="WorksheetWriter.cs" />
   </ItemGroup>
   <ItemGroup>
