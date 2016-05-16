@@ -7,13 +7,13 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace OpenXMLTools
 {
-    public class WeekRateRecord : IRecord
+    public class RecordByWeek : IRecord
     {
         public int Week { get; private set; }
         public double TotalFlowRate { get; private set; }
         public double CumalativeVolume { get; private set; }
 
-        public WeekRateRecord(int week, double totalRate, double cumalativeVolume)
+        public RecordByWeek(int week, double totalRate, double cumalativeVolume)
         {
             Week = week;
             TotalFlowRate = totalRate;

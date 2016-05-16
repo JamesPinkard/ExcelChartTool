@@ -90,11 +90,11 @@ namespace OpenXMLTools
             }
         }
 
-        public StationRecord GetRecordForWeek(int weekIndex)
+        public RecordByStation GetRecordForWeek(int weekIndex)
         {
             if (Contains(weekIndex))
             {
-                return new StationRecord(StationName, weekIndex, GetWeeklyRate(weekIndex));
+                return new RecordByStation(StationName, weekIndex, GetWeeklyRate(weekIndex));
             }
             else return null;
         }

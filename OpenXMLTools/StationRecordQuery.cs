@@ -13,16 +13,16 @@ namespace OpenXMLTools
             _recordProvider = recordProvider;
         }
 
-        public List<StationRecord> GetStationRecords(string sheetName)
+        public List<RecordByStation> GetStationRecords(string sheetName)
         {
             var worksheetQuery = _recordProvider.MakeWorksheetQuery(sheetName);
-            return worksheetQuery.GetStationValues();
+            return worksheetQuery.GetRecordsByStation();
         }
 
-        public List<WeekRateRecord> GetWeeklyRates(string sheetName)
+        public List<RecordByWeek> GetWeeklyRates(string sheetName)
         {
             var worksheetQuery = _recordProvider.MakeWorksheetQuery(sheetName);
-            return worksheetQuery.GetWeeklyRates();
+            return worksheetQuery.GetRecordsByWeek();
         }
 
         private readonly RecordProvider _recordProvider;

@@ -12,13 +12,13 @@ using System.Globalization;
 
 namespace OpenXMLTools
 {
-    public class StationRecord : IRecord
+    public class RecordByStation : IRecord
     {
         public string StationName { get; private set; }
         public int Week { get; private set; }
         public double FlowRateForWeek { get; private set; }
 
-        public StationRecord(string stationName, int week, double flowRate)
+        public RecordByStation(string stationName, int week, double flowRate)
         {
             StationName = stationName;
             Week = week;

@@ -35,7 +35,7 @@ namespace OpenxmlConsoleApplication
             {
                 RecordProvider recordProvider = new RecordProvider(spreadsheetDocument);
                 var worksheetQuery = recordProvider.MakeWorksheetQuery(rawRPWSheetName);
-                var records = worksheetQuery.GetWeeklyRates();
+                var records = worksheetQuery.GetRecordsByWeek();
 
                 // ATTEMPT TO WRITE RECORDS
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);
