@@ -1,0 +1,170 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Drawing.Spreadsheet;
+
+using DrawingChart = DocumentFormat.OpenXml.Drawing.Charts.Chart;
+using DrawingValues = DocumentFormat.OpenXml.Drawing.Charts.Values;
+
+using OpenXMLTools;
+
+namespace OpenxmlConsoleApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string docName = @".\O&M-4.28.16.xlsx";
+            string newDocumentName = @".\O&M_Copy.xlsx";
+            string injectionRateSheetName = @"Weekly Inj_Rates";
+            string extractionRateSheetName = @"Weekly Ext_Rates";
+            string remotePumpingRateSheetName = @"WeeklyRPWs";
+            string sumChartSheetName = @"SumVol";
+            string rawRPWSheetName = @"RPWs";
+
+            string chartdocName = @"C:\Users\jpinkard\Documents\Sheet6.xlsx";
+            string worksheetName = "Joe";
+            string title = "New Chart";
+            Dictionary<string, int> data = new Dictionary<string, int>();
+            data.Add("abc", 1);
+
+
+            //CopyWorkbook(docName, newDocumentName);
+            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(newDocumentName, true))
+            {
+                SpreadsheetHelper helper = new SpreadsheetHelper(spreadsheetDocument);
+
+                Worksheet rpws = helper.GetWorksheet(rawRPWSheetName);
+                IEnumerable<Row> rpwRows = rpws.Descendants<Row>().Where(r => r.RowIndex.Value <= 10);
+                
+                foreach (var row in rpwRows)
+                {
+                    Console.WriteLine(row.RowIndex.Value);
+                    foreach (Cell cell in row)
+                    {
+                        Console.Write("{0} ", cell.InnerText);
+                    }
+                    Console.Write("\r\n");
+                }
+
+            }
+
+            Console.ReadKey();
+        }
+
+        private static void BuildChart(SpreadsheetDocument spreadsheetDocument)
+        {
+            ChartsheetPart newChartSheetPart = AddChartsheet(spreadsheetDocument);
+
+
+            var drawPart = newChartSheetPart.AddNewPart<DrawingsPart>();
+            newChartSheetPart.Chartsheet.Drawing = new Drawing() { Id = newChartSheetPart.GetIdOfPart(drawPart) };
+
+            var chartPart = drawPart.AddNewPart<ChartPart>();
+            chartPart.ChartSpace = new ChartSpace();
+            chartPart.ChartSpace.Append(new EditingLanguage() { Val = new StringValue("en-US") });
+            var chart = chartPart.ChartSpace.AppendChild<DrawingChart>(new DrawingChart());
+        }
+
+        private static void CheckChartValues(string sumChartSheetName, SpreadsheetDocument spreadsheetDocument)
+        {
+            SpreadsheetHelper helper = new SpreadsheetHelper(spreadsheetDocument);
+
+            ChartsheetPart sumChartSheetPart = helper.GetSheetPart(sumChartSheetName) as ChartsheetPart;
+
+            IEnumerable<DrawingsPart> drawings = sumChartSheetPart.GetPartsOfType<DrawingsPart>();
+            DrawingsPart drawPart = drawings.First();
+            IEnumerable<ChartPart> allChartParts = drawPart.GetPartsOfType<ChartPart>();
+            ChartPart chartPart = allChartParts.First();
+            var myChart = chartPart.ChartSpace.GetFirstChild<DrawingChart>();
+            var scatterChart = myChart.PlotArea.GetFirstChild<ScatterChart>();
+            var series = scatterChart.GetFirstChild<ScatterChartSeries>();
+            var xValues = series.GetFirstChild<XValues>();
+            var yValues = series.GetFirstChild<YValues>();
+
+            var xRefs = xValues.Elements<NumberReference>();
+            var yRefs = yValues.Elements<NumberReference>();
+            //string[] formulaText = new string[] { xRefs.First().Formula.Text, yRefs.First().Formula.Text };
+            string[] formulaText = new string[] { sumChartSheetPart.Chartsheet.OuterXml };
+
+            File.WriteAllLines(@".\output.txt", formulaText);
+            Console.WriteLine(sumChartSheetPart.Chartsheet.OuterXml);
+        }
+
+        private static void CopyWorkbook(string docName, string newDocumentName)
+        {
+            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(docName, false))
+            using (SpreadsheetDocument newDocument = SpreadsheetDocument.Create(newDocumentName, SpreadsheetDocumentType.Workbook))
+            {
+                foreach (var part in spreadsheetDocument.Parts)
+                {
+                    newDocument.AddPart(part.OpenXmlPart, part.RelationshipId);
+                }
+            }
+        }
+
+        private static WorksheetPart AddWorksheet(SpreadsheetDocument spreadsheetDocument)
+        {
+            // Add a blank WorksheetPart.
+            WorksheetPart newWorksheetPart = spreadsheetDocument.WorkbookPart.AddNewPart<WorksheetPart>();
+            newWorksheetPart.Worksheet = new Worksheet(new SheetData());
+            
+            AssociateSheet(spreadsheetDocument, newWorksheetPart);
+
+            return newWorksheetPart;
+        }
+
+        private static ChartsheetPart AddChartsheet(SpreadsheetDocument spreadsheetDocument)
+        {
+            // Add a blank ChartsheetPart.
+            ChartsheetPart newChartSheetPart = spreadsheetDocument.WorkbookPart.AddNewPart<ChartsheetPart>();
+            newChartSheetPart.Chartsheet = new Chartsheet();
+            
+            AssociateSheet(spreadsheetDocument, newChartSheetPart);
+
+            return newChartSheetPart;
+        }
+
+        private static Sheet AssociateSheet(SpreadsheetDocument spreadsheetDocument, OpenXmlPart newWorksheetPart)
+        {
+            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.GetFirstChild<Sheets>();
+            string relationshipId = spreadsheetDocument.WorkbookPart.GetIdOfPart(newWorksheetPart);
+
+            // Get a unique ID for the new worksheet.
+            uint sheetId = 1;
+            if (sheets.Elements<Sheet>().Count() > 0)
+            {
+                sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
+            }
+
+            // Give the new worksheet a name.
+            string sheetName = "Sheet_" + sheetId;
+
+            // Append the new worksheet and associate it with the workbook.
+            Sheet sheet = new Sheet() { Id = relationshipId, SheetId = sheetId, Name = sheetName };
+            sheets.Append(sheet);
+
+            return sheet;
+        }
+
+        private static void CheckSheetsExist(string injectionRateSheet, string extractionRateSheet, string remotePumpingRateSheet, SpreadsheetHelper helper)
+        {
+            bool injSheetExists = helper.VerifySheet(injectionRateSheet);
+            bool extSheetExists = helper.VerifySheet(extractionRateSheet);
+            bool rpwSheetExists = helper.VerifySheet(remotePumpingRateSheet);
+
+            Console.WriteLine("Injection Sheet Should Exist: {0}", injSheetExists);
+            Console.WriteLine("Extraction Sheet Should Exist: {0}", extSheetExists);
+            Console.WriteLine("Remote Pumping Sheet Should Exist: {0}", rpwSheetExists);
+        }
+    }
+}

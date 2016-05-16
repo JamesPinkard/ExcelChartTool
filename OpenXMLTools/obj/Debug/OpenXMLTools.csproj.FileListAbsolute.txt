@@ -1,0 +1,18 @@
+c:\users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\bin\Debug\OpenXMLTools.dll
+c:\users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\bin\Debug\OpenXMLTools.pdb
+c:\users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\bin\Debug\DocumentFormat.OpenXml.dll
+c:\users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.csprojResolveAssemblyReference.cache
+c:\users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.dll
+c:\users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.pdb
+E:\VS_Projects\ExcelChartTool\OpenXMLTools\bin\Debug\OpenXMLTools.dll
+E:\VS_Projects\ExcelChartTool\OpenXMLTools\bin\Debug\OpenXMLTools.pdb
+E:\VS_Projects\ExcelChartTool\OpenXMLTools\bin\Debug\DocumentFormat.OpenXml.dll
+E:\VS_Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.csprojResolveAssemblyReference.cache
+E:\VS_Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.dll
+E:\VS_Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.pdb
+C:\Users\James\Desktop\ExcelChartTool\OpenXMLTools\bin\Debug\OpenXMLTools.dll
+C:\Users\James\Desktop\ExcelChartTool\OpenXMLTools\bin\Debug\OpenXMLTools.pdb
+C:\Users\James\Desktop\ExcelChartTool\OpenXMLTools\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\James\Desktop\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.csprojResolveAssemblyReference.cache
+C:\Users\James\Desktop\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.dll
+C:\Users\James\Desktop\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.pdb
