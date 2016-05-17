@@ -33,9 +33,22 @@ namespace OpenxmlConsoleApplication
             
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(newDocumentName, true))
             {
-                RecordProvider recordProvider = new RecordProvider(spreadsheetDocument);
-                var worksheetQuery = recordProvider.MakeWorksheetQuery(rawRPWSheetName);
-                var records = worksheetQuery.GetRecordsByWeek();
+                var workbookPart = spreadsheetDocument.WorkbookPart;
+                var workbookHandler = new WorkbookHandler(workbookPart);
+                var worksheet = workbookHandler.GetWorksheet(rawRPWSheetName);
+                var rowTable = new WorksheetRowTable(worksheet);
+
+                var sharedStringList = workbookHandler.GetSharedStringList();
+                var parserFacory = new FieldParserFactory(sharedStringList);
+                var parser = parserFacory.MakeParser();
+
+                var fieldProcessor = new FieldProcessor(rowTable, parser);
+                var fields = fieldProcessor.ProcessFields();
+                var recordParser = new WeekRecordParser();
+                var recordQuery = new StationTableRecordQuery(recordParser);
+                var fieldFilter = new StationNameFieldFilter("RPW-03");
+                var recordProcessor = new RecordProcessor(fields, recordQuery, fieldFilter);                                
+                var records = recordProcessor.ProcessRecords();
 
                 // ATTEMPT TO WRITE RECORDS
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);

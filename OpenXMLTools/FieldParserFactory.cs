@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenXMLTools
 {
-    class FieldParserFactory
+    public class FieldParserFactory
     {
         public FieldParserFactory(List<SharedStringItem> sharedStringList)
         {
