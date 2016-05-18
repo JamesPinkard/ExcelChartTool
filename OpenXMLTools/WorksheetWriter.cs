@@ -28,6 +28,13 @@ namespace OpenXMLTools
             _workbookPart = workbookPart;
         }
 
+        public string GetSheetName()
+        {
+            string sheetId = _workbookPart.GetIdOfPart(_worksheetPart);
+            Sheet sheet = _workbookPart.Workbook.Descendants<Sheet>().Where(s => s.Id.Value.Equals(sheetId)).First();
+            return sheet.Name;
+        }
+
         public void WriteRecords(IEnumerable<IRecord> records)
         {
             WorksheetPart replacementPart = _workbookPart.AddNewPart<WorksheetPart>();

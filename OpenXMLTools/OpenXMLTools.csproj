@@ -45,16 +45,21 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarChartMediator.cs" />
     <Compile Include="BarChartSeriesFormatter.cs" />
     <Compile Include="CellParser.cs" />
     <Compile Include="CellReference.cs" />
     <Compile Include="ChartInserter.cs" />
+    <Compile Include="ChartLibrary.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="IFieldFilter.cs" />
     <Compile Include="IRecordQuery.cs" />
     <Compile Include="IRowTable.cs" />
     <Compile Include="IRecordParser.cs" />
+    <Compile Include="ISeriesFormatter.cs" />
+    <Compile Include="RangeProcessor.cs" />
+    <Compile Include="ScatterChartMediator.cs" />
     <Compile Include="StationNameFieldFilter.cs" />
     <Compile Include="StationTableRecordQuery.cs" />
     <Compile Include="StationRecordParser.cs" />
@@ -79,6 +84,7 @@
     <Compile Include="RecordProcessor.cs" />
     <Compile Include="Records\RecordByWeek.cs" />
     <Compile Include="WorkbookWriter.cs" />
+    <Compile Include="WorksheetRange.cs" />
     <Compile Include="WorksheetRowTable.cs" />
     <Compile Include="WorksheetWriter.cs" />
   </ItemGroup>

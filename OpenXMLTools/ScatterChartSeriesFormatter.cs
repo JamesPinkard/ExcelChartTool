@@ -17,7 +17,7 @@ using DrawingValues = DocumentFormat.OpenXml.Drawing.Charts.Values;
 
 namespace OpenXMLTools
 {
-    public class ScatterChartSeriesFormatter
+    public class ScatterChartSeriesFormatter : ISeriesFormatter
     {
         public ScatterChartSeriesFormatter(ScatterChartSeries series)
         {
@@ -41,7 +41,32 @@ namespace OpenXMLTools
             yRefs.NumberingCache = new NumberingCache();
         }
 
+        public void SetSeriesFormula(string xRangeFormula, string yRangeFormula)
+        {
+            SetXFormula(xRangeFormula);
+            SetYFormula(yRangeFormula);
+        }
 
+        public void SetXFormula(string xRangeFormula)
+        {
+            var xValues = _series.GetFirstChild<XValues>();
+            var xRefs = xValues.Elements<NumberReference>().First();
+            xRefs.Formula = new Formula(xRangeFormula);
+            xRefs.NumberingCache = new NumberingCache();
+        }
+
+        public void SetYFormula(string yRangeFormula)
+        {
+            var yValues = _series.GetFirstChild<YValues>();
+            var yRefs = yValues.Elements<NumberReference>().First();
+            yRefs.Formula = new Formula(yRangeFormula);
+            yRefs.NumberingCache = new NumberingCache();
+        }
+
+        public void SetSeriesTitle(string title)
+        {
+            _series.SeriesText = new SeriesText(new NumericValue() { Text = title });
+        }
 
         private ScatterChartSeries _series;
     }

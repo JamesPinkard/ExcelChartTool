@@ -46,14 +46,24 @@ namespace OpenxmlConsoleApplication
                 var fields = fieldProcessor.ProcessFields();
                 var recordParser = new WeekRecordParser();
                 var recordQuery = new StationTableRecordQuery(recordParser);
-                var fieldFilter = new StationNameFieldFilter("RPW-03");
-                var recordProcessor = new RecordProcessor(fields, recordQuery, fieldFilter);                                
+
+                // Process effluent data;
+                var effluentFieldFilter = new StationNameFieldFilter("RPW-03");
+                var recordProcessor = new RecordProcessor(fields, recordQuery, effluentFieldFilter);                                
                 var records = recordProcessor.ProcessRecords();
+
+                // Process influent data;
+                var influentFieldFilter = new StationNameFieldFilter(new List<string>() { "RPW-06", "RPW-07" });
+                var influentRecordProcessor = new RecordProcessor(fields, recordQuery, influentFieldFilter);
+                var influentRecords = influentRecordProcessor.ProcessRecords();
 
                 // ATTEMPT TO WRITE RECORDS
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);
                 var worksheetWriter = workbookWriter.CreateWorksheetWriter("records");
-                worksheetWriter.WriteRecords(records);
+                var rangeProcessor = new RangeProcessor(worksheetWriter);
+                var sheetRange = rangeProcessor.AddRecords(records);
+                var influentSheetRange = rangeProcessor.AddRecords(influentRecords);
+                rangeProcessor.WriteRecords();
 
 
                 //var values = worksheetQuery.GetStationValues();
@@ -61,27 +71,29 @@ namespace OpenxmlConsoleApplication
                 //valueWriter.Write(values);
 
                 //  set Cumulative Volume Series
-                var helper = new SpreadsheetHelper(spreadsheetDocument);
-                var sheetPart = helper.GetSheetPart(sumChartSheetName) as ChartsheetPart;
-                var drawingsPart = sheetPart.GetPartsOfType<DrawingsPart>().First();
-                var chartPart = drawingsPart.GetPartsOfType<ChartPart>().First();
-                var chartObject = chartPart.ChartSpace.GetFirstChild<DrawingChart>();
-                var scatterChart = chartObject.PlotArea.GetFirstChild<ScatterChart>();
-                var series = scatterChart.GetFirstChild<ScatterChartSeries>();
+                var chartLibrary = new ChartLibrary(spreadsheetDocument);
+                var scatterChartMediator = chartLibrary.GetScatterChartMediator(sumChartSheetName);
+                var effluentScatterSeriesFormatter = scatterChartMediator.GetSeriesFormatter("Extraction");
 
-                var formatter = new ScatterChartSeriesFormatter(series);
-                formatter.SetValues("records", 2, 4, records.Count());
+                var xFormula = sheetRange.GetColumnFormula(2);
+                var volumeCellFormula = sheetRange.GetColumnFormula(4);
+                effluentScatterSeriesFormatter.SetSeriesFormula(xFormula, volumeCellFormula);
+
+                var barChartMediator = chartLibrary.GetBarChartMediator(ratesChartSheetName);
+                var effluentSeriesFormatter = barChartMediator.GetSeriesFormatter("Extraction");
+                var weekRateFormula = sheetRange.GetColumnFormula(3);
+                effluentSeriesFormatter.SetSeriesFormula(xFormula, weekRateFormula);
 
                 // set Pump Rate Bar Chart
-                var barSheetPart = helper.GetSheetPart(ratesChartSheetName) as ChartsheetPart;
-                var barDrawingsPart = barSheetPart.GetPartsOfType<DrawingsPart>().First();
-                var barChartPart = barDrawingsPart.GetPartsOfType<ChartPart>().First();
-                var barChartObject = barChartPart.ChartSpace.GetFirstChild<DrawingChart>();
-                var barChart = barChartObject.PlotArea.GetFirstChild<BarChart>();
-                var barSeries = barChart.GetFirstChild<BarChartSeries>();
+                var influentScatterSeriesFormatter = scatterChartMediator.GetSeriesFormatter("Injection");
 
-                var barFormatter = new BarChartSeriesFormatter(barSeries);
-                barFormatter.SetValues("records", 2, 3, records.Count());
+                var influentFormula = influentSheetRange.GetColumnFormula(2);
+                var influentVolumeFormula = influentSheetRange.GetColumnFormula(4);
+                influentScatterSeriesFormatter.SetSeriesFormula(influentFormula, influentVolumeFormula);
+
+                var influentWeekRateFormula = influentSheetRange.GetColumnFormula(3);
+                var influentSeriesFormatter = barChartMediator.GetSeriesFormatter("Injection");
+                influentSeriesFormatter.SetSeriesFormula(influentFormula, influentWeekRateFormula);
             }
 
             System.Diagnostics.Process.Start(newDocumentName);

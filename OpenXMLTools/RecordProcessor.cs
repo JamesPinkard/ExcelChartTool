@@ -8,6 +8,11 @@ namespace OpenXMLTools
 {
     public class RecordProcessor
     {
+        public RecordProcessor(IEnumerable<MountainViewField> fields, IRecordQuery fieldQuery): this(fields, fieldQuery, null)
+        {
+
+        }
+
         public RecordProcessor(IEnumerable<MountainViewField> fields, IRecordQuery fieldQuery, IFieldFilter fieldFilter)
         {
             _fields = fields;
@@ -15,10 +20,27 @@ namespace OpenXMLTools
             _fieldFilter = fieldFilter;
         }
 
+        
+
+        public IFieldFilter FieldFilter
+        {
+            get { return _fieldFilter; }
+            set { _fieldFilter = value; }
+        }
+
+
         public IEnumerable<IRecord> ProcessRecords()
         {
-            var filteredFields = _fieldFilter.Filter(_fields);
-            var records = _fieldQuery.Query(filteredFields);
+            IEnumerable<MountainViewField> processedFields;
+            if (_fieldFilter != null)
+            {
+                processedFields = _fieldFilter.Filter(_fields);
+            }
+            else
+            {
+                processedFields = _fields;
+            }
+            var records = _fieldQuery.Query(processedFields);
             return records;
         }        
 
