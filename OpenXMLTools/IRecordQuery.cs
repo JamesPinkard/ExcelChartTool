@@ -4,6 +4,6 @@ namespace OpenXMLTools
 {
     public interface IRecordQuery
     {
-        IEnumerable<IRecord> Query(IEnumerable<MountainViewField> fields);
+        IEnumerable<IRecord> Query(IEnumerable<MountainViewField> fields, IEnumerable<int> weeks);        
     }
 }

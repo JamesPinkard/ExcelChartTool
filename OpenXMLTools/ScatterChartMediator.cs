@@ -7,23 +7,36 @@ using System.Threading.Tasks;
 
 namespace OpenXMLTools
 {
-    public class ScatterChartMediator
+    public class ScatterChartMediator : IChartMediator
     {
         public ScatterChartMediator(ScatterChart scatterChart)
         {
             _scatterChart = scatterChart;
         }
 
-        public ScatterChartSeries GetSeries(string seriesName)
+        public bool HasSeries(string seriesName)
         {
-            var series = _scatterChart.Elements<ScatterChartSeries>().Where(s => s.SeriesText.NumericValue.Text == seriesName).First();
-            return series;            
+            var series = GetSeries(seriesName);
+            if (series == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public ScatterChartSeriesFormatter GetSeriesFormatter(string seriesName)
+        public ISeriesFormatter GetSeriesFormatter(string seriesName)
         {
             var series = GetSeries(seriesName);
             return new ScatterChartSeriesFormatter(series);
+        }
+
+        private ScatterChartSeries GetSeries(string seriesName)
+        {
+            var series = _scatterChart.Elements<ScatterChartSeries>().Where(s => s.SeriesText.NumericValue.Text == seriesName).FirstOrDefault();
+            return series;            
         }
 
         ScatterChart _scatterChart;

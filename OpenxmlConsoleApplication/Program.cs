@@ -70,29 +70,29 @@ namespace OpenxmlConsoleApplication
                 //var valueWriter = new RecordWriter(@"rpw_output.csv");
                 //valueWriter.Write(values);
 
-                //  set Cumulative Volume Series
                 var chartLibrary = new ChartLibrary(spreadsheetDocument);
                 var scatterChartMediator = chartLibrary.GetScatterChartMediator(sumChartSheetName);
-                var effluentScatterSeriesFormatter = scatterChartMediator.GetSeriesFormatter("Extraction");
+                var effluentScatterSeriesFormatter = GetExtractionOrEffluentSeries(scatterChartMediator, "Extraction", "Effluent");
 
+                //  set Cumulative Volume Series
                 var xFormula = sheetRange.GetColumnFormula(2);
                 var volumeCellFormula = sheetRange.GetColumnFormula(4);
                 effluentScatterSeriesFormatter.SetSeriesFormula(xFormula, volumeCellFormula);
 
                 var barChartMediator = chartLibrary.GetBarChartMediator(ratesChartSheetName);
-                var effluentSeriesFormatter = barChartMediator.GetSeriesFormatter("Extraction");
+                var effluentSeriesFormatter = GetExtractionOrEffluentSeries(barChartMediator, "Extraction", "Effluent");
                 var weekRateFormula = sheetRange.GetColumnFormula(3);
                 effluentSeriesFormatter.SetSeriesFormula(xFormula, weekRateFormula);
 
-                // set Pump Rate Bar Chart
-                var influentScatterSeriesFormatter = scatterChartMediator.GetSeriesFormatter("Injection");
 
+                // set Pump Rate Bar Chart
+                var influentScatterSeriesFormatter = GetExtractionOrEffluentSeries(scatterChartMediator, "Injection", "Influent");
                 var influentFormula = influentSheetRange.GetColumnFormula(2);
                 var influentVolumeFormula = influentSheetRange.GetColumnFormula(4);
                 influentScatterSeriesFormatter.SetSeriesFormula(influentFormula, influentVolumeFormula);
 
+                var influentSeriesFormatter = GetExtractionOrEffluentSeries(barChartMediator, "Injection", "Influent");
                 var influentWeekRateFormula = influentSheetRange.GetColumnFormula(3);
-                var influentSeriesFormatter = barChartMediator.GetSeriesFormatter("Injection");
                 influentSeriesFormatter.SetSeriesFormula(influentFormula, influentWeekRateFormula);
             }
 
@@ -106,6 +106,20 @@ namespace OpenxmlConsoleApplication
         //string remotePumpingRateSheetName = @"WeeklyRPWs";
         //string rawInjSheetName = @"Sorted_Inj";
         //string rawExtSheetName = @"Sorted_Ext";
+        private static ISeriesFormatter GetExtractionOrEffluentSeries(IChartMediator chartMediator, string originalName, string newName)
+        {
+            ISeriesFormatter seriesFormatter;
+            if (chartMediator.HasSeries(originalName))
+            {
+                seriesFormatter = chartMediator.GetSeriesFormatter(originalName);
+                seriesFormatter.SetSeriesTitle(newName);
+            }
+            else
+            {
+                seriesFormatter = chartMediator.GetSeriesFormatter(newName);
+            }
+            return seriesFormatter;
+        }
 
         private static void PrintStationRates(List<Tuple<string, int, double>> stationRates)
         {

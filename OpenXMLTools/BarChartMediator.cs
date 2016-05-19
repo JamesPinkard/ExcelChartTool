@@ -7,25 +7,38 @@ using System.Threading.Tasks;
 
 namespace OpenXMLTools
 {
-    public class BarChartMediator
+    public class BarChartMediator : IChartMediator
     {
-        public BarChartMediator(BarChart scatterChart)
+        public BarChartMediator(BarChart barChart)
         {
-            _scatterChart = scatterChart;
+            _barChart = barChart;
         }
 
-        public BarChartSeries GetSeries(string seriesName)
+        public bool HasSeries(string seriesName)
         {
-            var series = _scatterChart.Elements<BarChartSeries>().Where(s => s.SeriesText.NumericValue.Text == seriesName).First();
-            return series;
+            var series = GetSeries(seriesName);
+            if (series == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public BarChartSeriesFormatter GetSeriesFormatter(string seriesName)
+        public ISeriesFormatter GetSeriesFormatter(string seriesName)
         {
             var series = GetSeries(seriesName);
             return new BarChartSeriesFormatter(series);
         }
 
-        BarChart _scatterChart;
+        private BarChartSeries GetSeries(string seriesName)
+        {
+            var series = _barChart.Elements<BarChartSeries>().Where(s => s.SeriesText.NumericValue.Text == seriesName).FirstOrDefault();
+            return series;
+        }
+
+        BarChart _barChart;
     }
 }

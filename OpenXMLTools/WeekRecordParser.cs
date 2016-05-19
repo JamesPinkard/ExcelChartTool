@@ -27,6 +27,11 @@ namespace OpenXMLTools
                         if (rate > 0) ratesOfTheWeek.Add(rate);
                         if (volume > 0) volumeOfTheWeek.Add(volume);
                     }
+                    else
+                    {
+                        ratesOfTheWeek.Add(0);
+                        volumeOfTheWeek.Add(0);
+                    }
                 }
                 cumalativeVolume += volumeOfTheWeek.Sum();
                 weekRecords.Add(new RecordByWeek(week, ratesOfTheWeek.Sum(), cumalativeVolume));

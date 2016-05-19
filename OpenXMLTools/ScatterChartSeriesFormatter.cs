@@ -65,7 +65,7 @@ namespace OpenXMLTools
 
         public void SetSeriesTitle(string title)
         {
-            _series.SeriesText = new SeriesText(new NumericValue() { Text = title });
+            _series.SeriesText.NumericValue = new NumericValue() { Text = title };
         }
 
         private ScatterChartSeries _series;

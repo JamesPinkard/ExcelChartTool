@@ -51,6 +51,7 @@
     <Compile Include="CellReference.cs" />
     <Compile Include="ChartInserter.cs" />
     <Compile Include="ChartLibrary.cs" />
+    <Compile Include="IChartMediator.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="IFieldFilter.cs" />

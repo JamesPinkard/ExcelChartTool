@@ -11,18 +11,13 @@ namespace OpenXMLTools
         public StationTableRecordQuery(IRecordParser recordParser)
         {
             _recordParser = recordParser;
-        }
+        }               
 
-        private IEnumerable<int> GetUniqueWeekIndices(IEnumerable<MountainViewField> fields)
+        public IEnumerable<IRecord> Query(IEnumerable<MountainViewField> fields, IEnumerable<int> weeks)
         {
-            HashSet<int> weekIndexes = new HashSet<int>();
-
-            foreach (var f in fields)
-            {
-                weekIndexes.Add(f.GetWeek());
-            }
-
-            return weekIndexes;
+            var stationTables = CompileStationTables(fields);            
+            var records = _recordParser.Parse(stationTables, weeks);
+            return records;
         }
 
         private IEnumerable<StationTable> CompileStationTables(IEnumerable<MountainViewField> fields)
@@ -44,14 +39,6 @@ namespace OpenXMLTools
             }
 
             return stationMeasurements;
-        }
-
-        public IEnumerable<IRecord> Query(IEnumerable<MountainViewField> fields)
-        {
-            var stationTables = CompileStationTables(fields);
-            var weekIndexes = GetUniqueWeekIndices(fields);
-            var records = _recordParser.Parse(stationTables, weekIndexes);
-            return records;
         }
 
         private IRecordParser _recordParser;
