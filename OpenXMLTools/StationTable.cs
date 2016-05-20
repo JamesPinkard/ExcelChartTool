@@ -46,22 +46,37 @@ namespace OpenXMLTools
             return _weeklyMeasurements.ContainsKey(weekIndex);
         }
 
-        public double GetWeeklyRate(int weekIndex)
+        public WeekTable GetTableForWeek(int weekIndex)
         {
             SetWeek(weekIndex);
-
-            var duration = _lastField.MeasureTime - _firstField.MeasureTime;
-            var flow = _lastField.TotalizerReading - _firstField.TotalizerReading;
-            var rate = flow / duration.TotalMinutes;
-            return rate;
+            var fields = GetFieldsForWeek(weekIndex);
+            return new WeekTable(weekIndex, fields, _firstField, _lastField);
         }
 
-        public double GetNetVolume(int weekIndex)
+        public RecordByStation GetRecordForWeek(int weekIndex)
         {
-            SetWeek(weekIndex);            
-            var totalFlow = _lastField.TotalizerReading - _firstField.TotalizerReading;
-           
-            return totalFlow;
+            if (Contains(weekIndex))
+            {
+                var weekTable = GetTableForWeek(weekIndex);
+                return new RecordByStation(StationName, weekIndex, weekTable.GetWeeklyFlowRate());
+            }
+            else return null;
+        }
+
+        public IEnumerable<MountainViewField> GetFieldsForWeek(int weekIndex)
+        {
+            return _weeklyMeasurements[weekIndex];
+        }
+
+        public IEnumerable<MountainViewField> GetStationFields()
+        {
+            List<MountainViewField> stationFields = new List<MountainViewField>();
+            foreach (List<MountainViewField> weekFields in _weeklyMeasurements.Values)
+            {
+                stationFields.AddRange(weekFields);
+            }
+            stationFields.OrderBy(f => f.MeasureTime);
+            return stationFields;
         }
 
         private void SetWeek(int weekIndex)
@@ -88,15 +103,6 @@ namespace OpenXMLTools
                     _lastField = orderedFields.Last();
                 }
             }
-        }
-
-        public RecordByStation GetRecordForWeek(int weekIndex)
-        {
-            if (Contains(weekIndex))
-            {
-                return new RecordByStation(StationName, weekIndex, GetWeeklyRate(weekIndex));
-            }
-            else return null;
         }
 
         private bool InvalidIndex(int weekIndex, int alternativeIndex)

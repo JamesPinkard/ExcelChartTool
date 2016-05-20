@@ -45,23 +45,28 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BarChartMediator.cs" />
-    <Compile Include="BarChartSeriesFormatter.cs" />
+    <Compile Include="Charts\BarChartMediator.cs" />
+    <Compile Include="Charts\BarChartSeriesFormatter.cs" />
     <Compile Include="CellParser.cs" />
     <Compile Include="CellReference.cs" />
-    <Compile Include="ChartInserter.cs" />
-    <Compile Include="ChartLibrary.cs" />
-    <Compile Include="IChartMediator.cs" />
+    <Compile Include="Charts\ChartInserter.cs" />
+    <Compile Include="Charts\ChartLibrary.cs" />
+    <Compile Include="Charts\IChartMediator.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="IFieldFilter.cs" />
+    <Compile Include="IndividualMeasurementRecord.cs" />
     <Compile Include="IRecordQuery.cs" />
     <Compile Include="IRowTable.cs" />
     <Compile Include="IRecordParser.cs" />
     <Compile Include="ISeriesFormatter.cs" />
+    <Compile Include="MeasurementRecord.cs" />
+    <Compile Include="MeasurementRecordParser.cs" />
     <Compile Include="RangeProcessor.cs" />
-    <Compile Include="ScatterChartMediator.cs" />
+    <Compile Include="Charts\ScatterChartMediator.cs" />
     <Compile Include="StationNameFieldFilter.cs" />
+    <Compile Include="StationReport.cs" />
+    <Compile Include="StationTableParser.cs" />
     <Compile Include="StationTableRecordQuery.cs" />
     <Compile Include="StationRecordParser.cs" />
     <Compile Include="RecordWriter.cs" />
@@ -69,7 +74,7 @@
     <Compile Include="RowParser\IRowParser.cs" />
     <Compile Include="FieldVerifier.cs" />
     <Compile Include="IFieldMapper.cs" />
-    <Compile Include="ScatterChartSeriesFormatter.cs" />
+    <Compile Include="Charts\ScatterChartSeriesFormatter.cs" />
     <Compile Include="IFieldParser.cs" />
     <Compile Include="Records\IRecord.cs" />
     <Compile Include="MountainViewField.cs" />
@@ -80,7 +85,10 @@
     <Compile Include="StationTable.cs" />
     <Compile Include="RowParser\ThreeColumnRowParser.cs" />
     <Compile Include="FieldProcessor.cs" />
+    <Compile Include="UniqueWeekFieldQuery.cs" />
+    <Compile Include="WeekMeasurementRecord.cs" />
     <Compile Include="WeekRecordParser.cs" />
+    <Compile Include="WeekTable.cs" />
     <Compile Include="WorkbookHandler.cs" />
     <Compile Include="RecordProcessor.cs" />
     <Compile Include="Records\RecordByWeek.cs" />

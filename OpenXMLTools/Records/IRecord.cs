@@ -7,8 +7,6 @@ namespace OpenXMLTools
     public interface IRecord
     {
         IEnumerable<Cell> ToCells();
-        IEnumerable<Cell> GetHeaderCells();
-
-        DateTime GetSundayOfWeek();
+        IEnumerable<Cell> GetHeaderCells(); 
     }
 }

@@ -18,6 +18,7 @@ namespace OpenXMLTools
             _fields = fields;
             _fieldQuery = fieldQuery;
             _fieldFilter = fieldFilter;
+            _uniqueWeekFieldQuery = new UniqueWeekFieldQuery();
         }
                 
         public IFieldFilter FieldFilter
@@ -28,7 +29,7 @@ namespace OpenXMLTools
 
         public IEnumerable<IRecord> ProcessRecords()
         {
-            IEnumerable<int> weeks = GetUniqueWeekIndices(_fields);
+            IEnumerable<int> weeks = _uniqueWeekFieldQuery.GetUniqueWeekIndices(_fields);
             IEnumerable<MountainViewField> processedFields;
             if (_fieldFilter != null)
             {
@@ -42,20 +43,11 @@ namespace OpenXMLTools
             return records;
         }
 
-        private IEnumerable<int> GetUniqueWeekIndices(IEnumerable<MountainViewField> fields)
-        {
-            HashSet<int> weekIndexes = new HashSet<int>();
 
-            foreach (var f in fields)
-            {
-                weekIndexes.Add(f.GetWeek());
-            }
-
-            return weekIndexes;
-        }
 
         IEnumerable<MountainViewField> _fields;
         IRecordQuery _fieldQuery;
         IFieldFilter _fieldFilter;
+        UniqueWeekFieldQuery _uniqueWeekFieldQuery;
     }
 }

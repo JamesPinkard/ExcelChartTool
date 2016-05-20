@@ -45,7 +45,8 @@ namespace OpenxmlConsoleApplication
                 var fieldProcessor = new FieldProcessor(rowTable, parser);
                 var fields = fieldProcessor.ProcessFields();
                 var recordParser = new WeekRecordParser();
-                var recordQuery = new StationTableRecordQuery(recordParser);
+                var stationTableParser = new StationTableParser();
+                var recordQuery = new StationTableRecordQuery(stationTableParser, recordParser);
 
                 // Process effluent data;
                 var effluentFieldFilter = new StationNameFieldFilter("RPW-03");
@@ -94,6 +95,13 @@ namespace OpenxmlConsoleApplication
                 var influentSeriesFormatter = GetExtractionOrEffluentSeries(barChartMediator, "Injection", "Influent");
                 var influentWeekRateFormula = influentSheetRange.GetColumnFormula(3);
                 influentSeriesFormatter.SetSeriesFormula(influentFormula, influentWeekRateFormula);
+
+                var stationTableParserForReport = new StationTableParser();
+                var stationReport = new StationReport(fields, stationTableParserForReport);
+                var reportRecords = stationReport.ProcessReport();
+                var stationReportWriter = workbookWriter.CreateWorksheetWriter("stationReport");
+                stationReportWriter.WriteRecords(reportRecords);
+
             }
 
             System.Diagnostics.Process.Start(newDocumentName);
