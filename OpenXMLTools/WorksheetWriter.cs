@@ -21,11 +21,19 @@ namespace OpenXMLTools
 {
     public class WorksheetWriter
     {
-        public WorksheetWriter(WorksheetPart worksheetPart, WorkbookPart workbookPart)
+        public WorksheetWriter(WorksheetPart worksheetPart, WorkbookPart workbookPart):this(worksheetPart, workbookPart, new CellReference(1, 1))
+        {
+
+        }
+
+        public WorksheetWriter(WorksheetPart worksheetPart, WorkbookPart workbookPart, CellReference startingCell)
         {
             _worksheetPart = worksheetPart;             
             _columnNames = GetColumnNames();
             _workbookPart = workbookPart;
+            _startingCell = startingCell;
+            _rowIndex = (uint)startingCell.RowIndex -1;
+            _columnIndex = startingCell.ColumnIndex -1;
         }
 
         public string GetSheetName()
@@ -33,6 +41,11 @@ namespace OpenXMLTools
             string sheetId = _workbookPart.GetIdOfPart(_worksheetPart);
             Sheet sheet = _workbookPart.Workbook.Descendants<Sheet>().Where(s => s.Id.Value.Equals(sheetId)).First();
             return sheet.Name;
+        }
+
+        public WorksheetPart GetWorksheetPart()
+        {
+            return _worksheetPart;
         }
 
         public void WriteRecords(IEnumerable<IRecord> records)
@@ -84,11 +97,12 @@ namespace OpenXMLTools
             _worksheetPart = replacementPart;
         }
 
-        public void WriteRow(IEnumerable<Cell> cells)
+        private void WriteRow(IEnumerable<Cell> cells)
         {            
             _writer.WriteStartElement(GetNextRow());
             foreach (Cell c in cells)
-            {                
+            {
+                c.CellReference = GetNextCellReference();
                 _writer.WriteElement(c);                
             }
             _writer.WriteEndElement();
@@ -97,7 +111,7 @@ namespace OpenXMLTools
 
         private void ResetCellIndex()
         {
-            _columnIndex = 0;
+            _columnIndex = _startingCell.ColumnIndex - 1;
         }
 
         private Row GetNextRow()
@@ -119,12 +133,13 @@ namespace OpenXMLTools
             return alphabet.ToList().Select(c => c.ToString()).ToList();
         }
 
-        private uint _rowIndex = 0;
-        private int _columnIndex = 0;
+        private uint _rowIndex;
+        private int _columnIndex;
         private readonly List<string> _columnNames;
         private WorksheetPart _worksheetPart;
         private OpenXmlWriter _writer;
         private WorkbookPart _workbookPart;
         private OpenXmlReader _reader;
+        private CellReference _startingCell;
     }
 }

@@ -99,9 +99,11 @@ namespace OpenxmlConsoleApplication
                 var stationTableParserForReport = new StationTableParser();
                 var stationReport = new StationReport(fields, stationTableParserForReport);
                 var reportRecords = stationReport.ProcessReport();
-                var stationReportWriter = workbookWriter.CreateWorksheetWriter("stationReport");
+                var stationReportWriter = workbookWriter.CreateWorksheetWriter("stationReport", new CellReference(2,2));
                 stationReportWriter.WriteRecords(reportRecords);
-
+                var reportWorksheetPart = stationReportWriter.GetWorksheetPart();
+                var reportFormatter = new WorksheetFormatter(reportWorksheetPart);
+                reportFormatter.FormatSheet();
             }
 
             System.Diagnostics.Process.Start(newDocumentName);
