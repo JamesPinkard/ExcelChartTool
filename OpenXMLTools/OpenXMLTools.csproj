@@ -53,13 +53,16 @@
     <Compile Include="Charts\ChartInserter.cs" />
     <Compile Include="Charts\ChartLibrary.cs" />
     <Compile Include="Charts\IChartMediator.cs" />
+    <Compile Include="CumulativeRecord.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="FieldWeekDictionary.cs" />
-    <Compile Include="MeasurementRecordParser - Copy.cs" />
     <Compile Include="MeasurementRecordParserSwap.cs" />
+    <Compile Include="MeasurementRecord\NamedCumulativeRecord.cs" />
+    <Compile Include="MeasurementRecord\QuarterCumulativeRecord.cs" />
     <Compile Include="QuarterlyReport.cs" />
     <Compile Include="MeasurementRecord\QuarterMeasurementRecord.cs" />
+    <Compile Include="QuarterRecordParser.cs" />
     <Compile Include="QuarterState\FirstQuarterState.cs" />
     <Compile Include="QuarterState\FourthQuarterState.cs" />
     <Compile Include="IFieldFilter.cs" />
@@ -70,7 +73,6 @@
     <Compile Include="IRecordParser.cs" />
     <Compile Include="ISeriesFormatter.cs" />
     <Compile Include="MeasurementRecord\MeasurementRecord.cs" />
-    <Compile Include="MeasurementRecordParser.cs" />
     <Compile Include="QuarterState\QuarterStateBase.cs" />
     <Compile Include="QuarterTable.cs" />
     <Compile Include="QuarterTableParser.cs" />
@@ -105,7 +107,7 @@
     <Compile Include="WeekTable.cs" />
     <Compile Include="WorkbookHandler.cs" />
     <Compile Include="RecordProcessor.cs" />
-    <Compile Include="Records\RecordByWeek.cs" />
+    <Compile Include="Records\WeekCumulativeRecord.cs" />
     <Compile Include="WorkbookWriter.cs" />
     <Compile Include="WorksheetFormatter.cs" />
     <Compile Include="WorksheetRange.cs" />

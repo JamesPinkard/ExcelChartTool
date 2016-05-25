@@ -70,6 +70,7 @@ namespace OpenXMLTools
                     _mergeCellRanges.Add(cellRange);
                     SetNewCellRange(cell);
                 }
+                _columnIndex++;
             }
 
             var mergeCells = new MergeCells() { Count = (uint)_mergeCellRanges.Count() };

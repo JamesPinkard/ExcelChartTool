@@ -11,6 +11,7 @@ namespace OpenXMLTools
         public RangeProcessor(WorksheetWriter worksheetWriter)
         {
             _worksheetWriter = worksheetWriter;
+            _bottomOfRange = _worksheetWriter.GetStartingCell().RowIndex;
         }
 
         public WorksheetRange AddRecords(IEnumerable<IRecord> records)
@@ -33,7 +34,7 @@ namespace OpenXMLTools
         }
 
         // because of header bottom of range sta
-        int _bottomOfRange = 1;        
+        int _bottomOfRange;        
         List<IRecord> _records = new List<IRecord>();
         WorksheetWriter _worksheetWriter;
     }

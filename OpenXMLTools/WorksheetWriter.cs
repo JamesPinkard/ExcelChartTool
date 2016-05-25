@@ -36,6 +36,11 @@ namespace OpenXMLTools
             _columnIndex = startingCell.ColumnIndex -1;
         }
 
+        public CellReference GetStartingCell()
+        {
+            return _startingCell;
+        }
+
         public string GetSheetName()
         {
             string sheetId = _workbookPart.GetIdOfPart(_worksheetPart);

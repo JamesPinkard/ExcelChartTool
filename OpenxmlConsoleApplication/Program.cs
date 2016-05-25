@@ -44,28 +44,36 @@ namespace OpenxmlConsoleApplication
 
                 var fieldProcessor = new FieldProcessor(rowTable, parser);
                 var fields = fieldProcessor.ProcessFields();
-                var recordParser = new WeekRecordParser();
+
                 var stationTableParser = new StationTableParser();
-                var recordQuery = new StationTableRecordQuery(stationTableParser, recordParser);
 
                 // Process effluent data;
+                var quarterParser = new QuarterTableParser(new ThirdQuarterState());
+                var effluentRecordParser = new QuarterRecordParser(quarterParser, "Effluent");
+                var recordQuery = new StationTableRecordQuery(stationTableParser, effluentRecordParser);
                 var effluentFieldFilter = new StationNameFieldFilter("RPW-03");
-                var recordProcessor = new RecordProcessor(fields, recordQuery, effluentFieldFilter);                                
-                var records = recordProcessor.ProcessRecords();
+                var effluentrecordProcessor = new RecordProcessor(fields, recordQuery, effluentFieldFilter);                                
+                var records = effluentrecordProcessor.ProcessRecords();
 
                 // Process influent data;
+                var influentquarterParser = new QuarterTableParser(new ThirdQuarterState());
+                var influentRecordParser = new QuarterRecordParser(influentquarterParser, "Influent");
+                var influentRecordQuery = new StationTableRecordQuery(stationTableParser, influentRecordParser);
                 var influentFieldFilter = new StationNameFieldFilter(new List<string>() { "RPW-06", "RPW-07" });
-                var influentRecordProcessor = new RecordProcessor(fields, recordQuery, influentFieldFilter);
+                var influentRecordProcessor = new RecordProcessor(fields, influentRecordQuery, influentFieldFilter);
                 var influentRecords = influentRecordProcessor.ProcessRecords();
 
                 // ATTEMPT TO WRITE RECORDS
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);
-                var worksheetWriter = workbookWriter.CreateWorksheetWriter("records");
+                var worksheetWriter = workbookWriter.CreateWorksheetWriter("records", new CellReference(2, 2));
                 var rangeProcessor = new RangeProcessor(worksheetWriter);
                 var sheetRange = rangeProcessor.AddRecords(records);
                 var influentSheetRange = rangeProcessor.AddRecords(influentRecords);
                 rangeProcessor.WriteRecords();
 
+                var cumulativeWorksheetPart = worksheetWriter.GetWorksheetPart();
+                var cumulativeFormatter = new WorksheetFormatter(cumulativeWorksheetPart);
+                cumulativeFormatter.FormatSheet();
 
                 //var values = worksheetQuery.GetStationValues();
                 //var valueWriter = new RecordWriter(@"rpw_output.csv");
@@ -76,24 +84,24 @@ namespace OpenxmlConsoleApplication
                 var effluentScatterSeriesFormatter = GetExtractionOrEffluentSeries(scatterChartMediator, "Extraction", "Effluent");
 
                 //  set Cumulative Volume Series
-                var xFormula = sheetRange.GetColumnFormula(2);
-                var volumeCellFormula = sheetRange.GetColumnFormula(4);
+                var xFormula = sheetRange.GetColumnFormula(4);
+                var volumeCellFormula = sheetRange.GetColumnFormula(6);
                 effluentScatterSeriesFormatter.SetSeriesFormula(xFormula, volumeCellFormula);
 
                 var barChartMediator = chartLibrary.GetBarChartMediator(ratesChartSheetName);
                 var effluentSeriesFormatter = GetExtractionOrEffluentSeries(barChartMediator, "Extraction", "Effluent");
-                var weekRateFormula = sheetRange.GetColumnFormula(3);
+                var weekRateFormula = sheetRange.GetColumnFormula(5);
                 effluentSeriesFormatter.SetSeriesFormula(xFormula, weekRateFormula);
 
 
                 // set Pump Rate Bar Chart
                 var influentScatterSeriesFormatter = GetExtractionOrEffluentSeries(scatterChartMediator, "Injection", "Influent");
-                var influentFormula = influentSheetRange.GetColumnFormula(2);
-                var influentVolumeFormula = influentSheetRange.GetColumnFormula(4);
+                var influentFormula = influentSheetRange.GetColumnFormula(4);
+                var influentVolumeFormula = influentSheetRange.GetColumnFormula(6);
                 influentScatterSeriesFormatter.SetSeriesFormula(influentFormula, influentVolumeFormula);
 
                 var influentSeriesFormatter = GetExtractionOrEffluentSeries(barChartMediator, "Injection", "Influent");
-                var influentWeekRateFormula = influentSheetRange.GetColumnFormula(3);
+                var influentWeekRateFormula = influentSheetRange.GetColumnFormula(5);
                 influentSeriesFormatter.SetSeriesFormula(influentFormula, influentWeekRateFormula);
 
                 var stationTableParserForReport = new StationTableParser();
@@ -101,6 +109,7 @@ namespace OpenxmlConsoleApplication
                 var reportRecords = stationReport.ProcessReport();
                 var stationReportWriter = workbookWriter.CreateWorksheetWriter("stationReport", new CellReference(2,2));
                 stationReportWriter.WriteRecords(reportRecords);
+
                 var reportWorksheetPart = stationReportWriter.GetWorksheetPart();
                 var reportFormatter = new WorksheetFormatter(reportWorksheetPart);
                 reportFormatter.FormatSheet();

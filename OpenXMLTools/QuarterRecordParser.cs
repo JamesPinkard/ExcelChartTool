@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace OpenXMLTools
 {
-    public class WeekRecordParser : IRecordParser
+    public class QuarterRecordParser : IRecordParser
     {
+        public QuarterRecordParser(QuarterTableParser quarterTableParser, string name)
+        {
+            _quarterTableParser = quarterTableParser;
+            _name = name;
+        }
+
+        // Same as WeekRecordParser
         public IEnumerable<IRecord> Parse(IEnumerable<StationTable> stationTables, IEnumerable<int> weeks)
         {
-            List<WeekCumulativeRecord> weekRecords = new List<WeekCumulativeRecord>();
+            List<CumulativeRecord> weekRecords = new List<CumulativeRecord>();
             double cumalativeVolume = 0;
+
 
             foreach (var week in weeks)
             {
@@ -35,10 +43,26 @@ namespace OpenXMLTools
                     }
                 }
                 cumalativeVolume += volumeOfTheWeek.Sum();
-                weekRecords.Add(new WeekCumulativeRecord(week, ratesOfTheWeek.Sum(), cumalativeVolume, volumeOfTheWeek.Sum()));
+                var weekRecord = new WeekCumulativeRecord(week, ratesOfTheWeek.Sum(), cumalativeVolume, volumeOfTheWeek.Sum());
+                var namedRecord = new NamedCumulativeRecord(weekRecord, _name);
+                weekRecords.Add(namedRecord);
+            }
+
+            var stationFields = stationTables.SelectMany(s => s.GetStationFields())
+                .OrderBy(f => f.MeasureTime);
+            var quarterTables = _quarterTableParser.Parse(stationFields);
+            foreach (var qtable in quarterTables)
+            {
+                var qWeek = qtable.GetFields().First().GetWeek();
+                var topField = weekRecords.Where(r => r.Week == qWeek).First();
+                var index = weekRecords.IndexOf(topField);
+                weekRecords[index] = new QuarterCumulativeRecord(topField, qtable.GetAverageWeeklyFlowRate());
             }
 
             return weekRecords;
         }
+
+        private QuarterTableParser _quarterTableParser;
+        private string _name;
     }
 }
