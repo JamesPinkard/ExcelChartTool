@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenXMLTools
 {
-    public class StationReport
+    public class QuarterlyReport
     {
-        public StationReport(IEnumerable<MountainViewField> fields, StationTableParser stationTableParser)
+        public QuarterlyReport(IEnumerable<MountainViewField> fields, StationTableParser stationTableParser)
         {
             _stationTableParser = stationTableParser;
             _fields = fields;
@@ -18,21 +18,19 @@ namespace OpenXMLTools
         public IEnumerable<IRecord> ProcessReport()
         {
             var report = new List<IRecord>();
-            var tables = _stationTableParser.CompileStationTables(_fields);            
+            var tables = _stationTableParser.CompileStationTables(_fields);
 
             foreach (var stationTable in tables)
             {
                 var stationFields = stationTable.GetStationFields();
-                var weeks = _uniqueWeekFieldQuery.GetUniqueWeekIndices(stationFields);
-                var firstField = stationFields.First();
-                var parser = new MeasurementRecordParserSwap(firstField);
-
-                foreach (var week in weeks)
+                var quarterlyParser = new QuarterTableParser(new ThirdQuarterState());
+                var quarterTables = quarterlyParser.Parse(stationFields);
+                var parser = new MeasurementRecordParserSwap(stationFields.First());                    
+                foreach (var quarter in quarterTables)
                 {
-                    var weekTable = stationTable.GetTableForWeek(week);
-                    var measurementRecords = parser.ProcessMeasurementRecord(weekTable);
-                    report.AddRange(measurementRecords);
-                }               
+                    var records = parser.ProcessMeasurementRecord(quarter);
+                    report.AddRange(records);                   
+                }
             }
 
             return report;

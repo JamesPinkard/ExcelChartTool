@@ -55,16 +55,28 @@
     <Compile Include="Charts\IChartMediator.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
+    <Compile Include="FieldWeekDictionary.cs" />
+    <Compile Include="MeasurementRecordParser - Copy.cs" />
+    <Compile Include="MeasurementRecordParserSwap.cs" />
+    <Compile Include="QuarterlyReport.cs" />
+    <Compile Include="MeasurementRecord\QuarterMeasurementRecord.cs" />
+    <Compile Include="QuarterState\FirstQuarterState.cs" />
+    <Compile Include="QuarterState\FourthQuarterState.cs" />
     <Compile Include="IFieldFilter.cs" />
-    <Compile Include="IndividualMeasurementRecord.cs" />
+    <Compile Include="MeasurementRecord\IndividualMeasurementRecord.cs" />
+    <Compile Include="QuarterState\IQuarterState.cs" />
     <Compile Include="IRecordQuery.cs" />
     <Compile Include="IRowTable.cs" />
     <Compile Include="IRecordParser.cs" />
     <Compile Include="ISeriesFormatter.cs" />
-    <Compile Include="MeasurementRecord.cs" />
+    <Compile Include="MeasurementRecord\MeasurementRecord.cs" />
     <Compile Include="MeasurementRecordParser.cs" />
+    <Compile Include="QuarterState\QuarterStateBase.cs" />
+    <Compile Include="QuarterTable.cs" />
+    <Compile Include="QuarterTableParser.cs" />
     <Compile Include="RangeProcessor.cs" />
     <Compile Include="Charts\ScatterChartMediator.cs" />
+    <Compile Include="QuarterState\SecondQuarterState.cs" />
     <Compile Include="StationNameFieldFilter.cs" />
     <Compile Include="StationReport.cs" />
     <Compile Include="StationTableParser.cs" />
@@ -86,8 +98,9 @@
     <Compile Include="StationTable.cs" />
     <Compile Include="RowParser\ThreeColumnRowParser.cs" />
     <Compile Include="FieldProcessor.cs" />
+    <Compile Include="QuarterState\ThirdQuarterState.cs" />
     <Compile Include="UniqueWeekFieldQuery.cs" />
-    <Compile Include="WeekMeasurementRecord.cs" />
+    <Compile Include="MeasurementRecord\WeekMeasurementRecord.cs" />
     <Compile Include="WeekRecordParser.cs" />
     <Compile Include="WeekTable.cs" />
     <Compile Include="WorkbookHandler.cs" />
@@ -102,6 +115,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

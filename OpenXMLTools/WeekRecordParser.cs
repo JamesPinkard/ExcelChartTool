@@ -22,7 +22,7 @@ namespace OpenXMLTools
                     if (station.Contains(week))
                     {
                         var weekTable = station.GetTableForWeek(week);
-                        var rate = weekTable.GetWeeklyFlowRate();
+                        var rate = weekTable.GetAverageWeeklyFlowRate();
                         var volume = weekTable.GetNetVolume();
 
                         if (rate > 0) ratesOfTheWeek.Add(rate);

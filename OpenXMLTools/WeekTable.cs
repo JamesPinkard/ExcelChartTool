@@ -27,7 +27,7 @@ namespace OpenXMLTools
             return duration.TotalMinutes;
         }
 
-        public double GetWeeklyFlowRate()
+        public double GetAverageWeeklyFlowRate()
         {
             var duration = GetCumulativeTime();
             if (duration == 0)

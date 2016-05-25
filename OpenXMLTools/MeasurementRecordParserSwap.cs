@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace OpenXMLTools
 {
-    public class MeasurementRecordParser
+    class MeasurementRecordParserSwap
     {
-        public MeasurementRecordParser(MountainViewField previousField)
-        {            
+        public MeasurementRecordParserSwap(MountainViewField previousField)
+        {
             _previousField = previousField;
         }
 
@@ -22,7 +22,15 @@ namespace OpenXMLTools
             var weeks = uniqueWeekFieldQuery.GetUniqueWeekIndices(quarterFields);
             _previousField = quarterFields.First();
 
+            foreach (var week in weeks)
+            {
+                var weekTable = quarter.GetTableForWeek(week);
+                var measurementRecords = ProcessMeasurementRecord(weekTable);
+                records.AddRange(measurementRecords);
+            }
 
+            var firstRecord = records.First() as WeekMeasurementRecord;
+            records[0] = new QuarterMeasurementRecord(firstRecord, quarter.GetAverageWeeklyFlowRate());
 
             return records;
         }
@@ -31,36 +39,19 @@ namespace OpenXMLTools
         {
             List<MeasurementRecord> records = new List<MeasurementRecord>();
             var weekFields = weekTable.GetFieldsForWeek();
-            WeekMeasurementRecord weekMeasurementRecord = ProcessWeek(weekTable);
-            records.Add(weekMeasurementRecord);
-            
 
-            if (weekFields.Count() > 1)
+
+            foreach (var measurement in weekFields)
             {
-                foreach (var measurement in weekFields.Skip(1))
-                {
-                    IndividualMeasurementRecord measurementRecord = ProcessField(measurement);
-                    records.Add(measurementRecord);
-                }
+                IndividualMeasurementRecord measurementRecord = ConvertToRecord(measurement);
+                records.Add(measurementRecord);
+                _previousField = measurement;
             }
+            
+            var firstRecord = records.First() as IndividualMeasurementRecord;
+            records[0] = ConvertToWeeklyRecord(firstRecord, weekTable);
 
             return records;
-        }
-
-        private IndividualMeasurementRecord ProcessField(MountainViewField measurement)
-        {
-            IndividualMeasurementRecord measurementRecord = ConvertToRecord(measurement);
-            _previousField = measurement;
-            return measurementRecord;
-        }
-
-        private WeekMeasurementRecord ProcessWeek(WeekTable weekTable)
-        {
-            var weekFields = weekTable.GetFieldsForWeek();
-            var firstMeasurement = weekFields.First();
-            IndividualMeasurementRecord firstMeasurementRecord = ProcessField(firstMeasurement);
-            WeekMeasurementRecord weekMeasurementRecord = ConvertToWeeklyRecord(firstMeasurementRecord, weekTable);            
-            return weekMeasurementRecord;
         }
 
         private WeekMeasurementRecord ConvertToWeeklyRecord(IndividualMeasurementRecord measurementRecord, WeekTable weekTable)
@@ -83,7 +74,7 @@ namespace OpenXMLTools
             var measurementRecord = new IndividualMeasurementRecord(stationName, measureTime, totalizerReading, cumulativeTime.TotalMinutes, cumulativeFlow);
             return measurementRecord;
         }
-        
+
         private MountainViewField _previousField;
     }
 }

@@ -34,5 +34,17 @@ namespace OpenXMLTools
                 new Cell { CellValue = new CellValue(CumulativeFlow.ToString()), DataType = CellValues.Number}
             };
         }
+
+        public override List<Cell> GetHeader()
+        {
+            return new List<Cell>()
+            {
+                new Cell { CellValue = new CellValue("Station"), DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Date and Time"), DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Total Flow\n (gal)"), DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Cumulative Time\n (min)"), DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Cumulative Flow\n (gal)"), DataType = CellValues.String}
+            };
+        }
     }
 }

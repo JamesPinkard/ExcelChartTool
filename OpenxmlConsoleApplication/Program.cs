@@ -97,7 +97,7 @@ namespace OpenxmlConsoleApplication
                 influentSeriesFormatter.SetSeriesFormula(influentFormula, influentWeekRateFormula);
 
                 var stationTableParserForReport = new StationTableParser();
-                var stationReport = new StationReport(fields, stationTableParserForReport);
+                var stationReport = new QuarterlyReport(fields, stationTableParserForReport);
                 var reportRecords = stationReport.ProcessReport();
                 var stationReportWriter = workbookWriter.CreateWorksheetWriter("stationReport", new CellReference(2,2));
                 stationReportWriter.WriteRecords(reportRecords);

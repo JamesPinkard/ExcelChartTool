@@ -16,14 +16,14 @@ namespace OpenXMLTools
 
             foreach (IGrouping<string, MountainViewField> wellFields in query)
             {
-                StationTable weekQuery = new StationTable(wellFields.Key);
+                StationTable stationTable = new StationTable(wellFields.Key);
 
                 foreach (var field in wellFields)
                 {
-                    weekQuery.AddField(field);
+                    stationTable.AddField(field);
                 }
 
-                stationMeasurements.Add(weekQuery);
+                stationMeasurements.Add(stationTable);
             }
 
             return stationMeasurements;

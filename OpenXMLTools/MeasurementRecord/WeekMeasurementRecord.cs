@@ -27,6 +27,16 @@ namespace OpenXMLTools
             return cellList;
         }
 
+        public override List<Cell> GetHeader()
+        {
+            List<Cell> cellList = _record.GetHeader();
+            cellList.Add(new Cell { CellValue = new CellValue("Week #\n"), DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Time"), DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Flow"), DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Flow Rate\n (GPM)"), DataType = CellValues.String });
+            return cellList;
+        }
+
         IndividualMeasurementRecord _record;
         private int _weekIndex;
         private double _cumulativeTime;

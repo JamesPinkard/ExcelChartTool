@@ -18,39 +18,28 @@ namespace OpenXMLTools
 
         public StationTable(string stationName)
         {
-            this._stationName = stationName;
-            this._verifier = new FieldVerifier(_weeklyMeasurements);
+            _stationName = stationName;
+            _fieldWeekDictionary = new FieldWeekDictionary();
         }
 
         public void AddField(MountainViewField field)
         {
-            if (field.StationName != this.StationName)
+            if (field.StationName != StationName)
             {
                 return;
             }
 
-            int weekOfMeasurement = field.GetWeek();
-            if (_weeklyMeasurements.ContainsKey(weekOfMeasurement))
-            {
-                _weeklyMeasurements[weekOfMeasurement].Add(field);
-            }
-            else
-            {
-                _weeklyMeasurements[weekOfMeasurement] = new List<MountainViewField>();
-                _weeklyMeasurements[weekOfMeasurement].Add(field);
-            }
+            _fieldWeekDictionary.AddField(field);
         }
 
         public bool Contains(int weekIndex)
         {
-            return _weeklyMeasurements.ContainsKey(weekIndex);
+            return _fieldWeekDictionary.Contains(weekIndex);
         }
 
         public WeekTable GetTableForWeek(int weekIndex)
         {
-            SetWeek(weekIndex);
-            var fields = GetFieldsForWeek(weekIndex);
-            return new WeekTable(weekIndex, fields, _firstField, _lastField);
+            return _fieldWeekDictionary.GetTableForWeek(weekIndex);
         }
 
         public RecordByStation GetRecordForWeek(int weekIndex)
@@ -58,62 +47,23 @@ namespace OpenXMLTools
             if (Contains(weekIndex))
             {
                 var weekTable = GetTableForWeek(weekIndex);
-                return new RecordByStation(StationName, weekIndex, weekTable.GetWeeklyFlowRate());
+                return new RecordByStation(StationName, weekIndex, weekTable.GetAverageWeeklyFlowRate());
             }
             else return null;
         }
 
         public IEnumerable<MountainViewField> GetFieldsForWeek(int weekIndex)
         {
-            return _weeklyMeasurements[weekIndex];
+            return _fieldWeekDictionary.GetFieldsForWeek(weekIndex);
         }
 
         public IEnumerable<MountainViewField> GetStationFields()
         {
-            List<MountainViewField> stationFields = new List<MountainViewField>();
-            foreach (List<MountainViewField> weekFields in _weeklyMeasurements.Values)
-            {
-                stationFields.AddRange(weekFields);
-            }
-            stationFields.OrderBy(f => f.MeasureTime);
-            return stationFields;
+            return _fieldWeekDictionary.GetFields();
         }
 
-        private void SetWeek(int weekIndex)
-        {
-            var fields = _weeklyMeasurements[weekIndex];
-            var orderedFields = fields.OrderBy(f => f.MeasureTime);
-            _firstField = orderedFields.First();
-            _lastField = orderedFields.Last();
-
-            if (_firstField == _lastField)
-            {
-
-                int alternativeIndex = _verifier.GetAlternativeIndex(weekIndex);
-                var alternativeField = _weeklyMeasurements[alternativeIndex].OrderBy(f => f.MeasureTime);
-
-                if (weekIndex > alternativeIndex)
-                {
-                    _firstField = orderedFields.First();
-                    _lastField = alternativeField.First();
-                }
-                else
-                {
-                    _firstField = alternativeField.Last();
-                    _lastField = orderedFields.Last();
-                }
-            }
-        }
-
-        private bool InvalidIndex(int weekIndex, int alternativeIndex)
-        {
-            return !Contains(alternativeIndex) && alternativeIndex != weekIndex;
-        }
-
-        private MountainViewField _firstField;
-        private MountainViewField _lastField;
-        readonly Dictionary<int, List<MountainViewField>> _weeklyMeasurements = new Dictionary<int, List<MountainViewField>>();
+        readonly FieldWeekDictionary _fieldWeekDictionary;
         readonly string _stationName;
-        private FieldVerifier _verifier;
+        
     }
 }
