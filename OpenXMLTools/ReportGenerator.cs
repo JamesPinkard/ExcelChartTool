@@ -8,28 +8,15 @@ using System.IO;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 
-using DrawingChart = DocumentFormat.OpenXml.Drawing.Charts.Chart;
-using DrawingValues = DocumentFormat.OpenXml.Drawing.Charts.Values;
-
-using OpenXMLTools;
-
-namespace OpenxmlConsoleApplication
+namespace OpenXMLTools
 {
-    class Program
+    public class ReportGenerator
     {
-        static void Main(string[] args)
+        public void GenerateReport()
         {
-            var reportGenerator = new ReportGenerator();
-            reportGenerator.GenerateReport();
-        }
-
-        private static void TestReportGeneration()
-        {
-            string docName = @".\O&M_Master Spreadsheet_Q1 2016.xlsx";
+            string origDocName = @".\O&M_Master Spreadsheet_Q1 2016.xlsx";
+            string docName = @".\O&M_TestSheet.xlsx";
             string sumChartSheetName = @"SumVol";
             string ratesChartSheetName = @"WeeklyFlowRates";
             string newDocumentName = @".\O&M_Copy.xlsx";
@@ -40,6 +27,8 @@ namespace OpenxmlConsoleApplication
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(newDocumentName, true))
             {
                 var workbookPart = spreadsheetDocument.WorkbookPart;
+                var stylePartGenerator = new WorkbookStylesPartGenerator(workbookPart);
+                stylePartGenerator.CreateWorkbookStylesPart();
                 var workbookHandler = new WorkbookHandler(workbookPart);
                 var worksheet = workbookHandler.GetWorksheet(rawRPWSheetName);
                 var rowTable = new WorksheetRowTable(worksheet);
@@ -79,7 +68,11 @@ namespace OpenxmlConsoleApplication
 
                 var cumulativeWorksheetPart = worksheetWriter.GetWorksheetPart();
                 var cumulativeFormatter = new WorksheetFormatter(cumulativeWorksheetPart);
+
+                // ATTEMPT TO FORMAT PAGE
+                FormatTableBColumns(cumulativeWorksheetPart);
                 cumulativeFormatter.FormatSheet();
+                FormatTableBHeaders(cumulativeWorksheetPart);
 
                 //var values = worksheetQuery.GetStationValues();
                 //var valueWriter = new RecordWriter(@"rpw_output.csv");
@@ -124,13 +117,96 @@ namespace OpenxmlConsoleApplication
             System.Diagnostics.Process.Start(newDocumentName);
         }
 
-        // Sheet names
-        //string injectionRateSheetName = @"Weekly Inj_Rates";
-        //string extractionRateSheetName = @"Weekly Ext_Rates";
-        //string remotePumpingRateSheetName = @"WeeklyRPWs";
-        //string rawInjSheetName = @"Sorted_Inj";
-        //string rawExtSheetName = @"Sorted_Ext";
-        private static ISeriesFormatter GetExtractionOrEffluentSeries(IChartMediator chartMediator, string originalName, string newName)
+        public void FormatTableBColumns(WorksheetPart worksheetPart)
+        {
+            var sheetFormatProperties = GenerateSheetFormatProperties();
+            var columns = GenerateColumns();
+
+            var worksheet = worksheetPart.Worksheet;
+            worksheet.SheetFormatProperties = sheetFormatProperties;
+            //worksheet.Append(columns);
+
+            
+            
+            
+            
+            //worksheet.Append(sheetFormatProperties);
+        }
+
+        public void FormatTableBHeaders(WorksheetPart worksheetPart)
+        {
+            var pageMargins = GeneratePageMargins();
+            var headerFooter = GenerateHeaderFooter();
+
+            var worksheet = worksheetPart.Worksheet;
+            worksheet.Append(pageMargins);
+            worksheet.Append(headerFooter);
+        }
+
+
+        // Creates an SheetFormatProperties instance and adds its children.
+        public SheetFormatProperties GenerateSheetFormatProperties()
+        {
+            SheetFormatProperties sheetFormatProperties1 = new SheetFormatProperties() { DefaultColumnWidth = 8.88671875D, DefaultRowHeight = 14.4D, DyDescent = 0.3D };
+            return sheetFormatProperties1;
+        }
+        
+        // Creates an Columns instance and adds its children.
+        public Columns GenerateColumns()
+        {
+            Columns columns1 = new Columns();
+            Column column1 = new Column() { Min = (UInt32Value)1U, Max = (UInt32Value)1U, Width = 3.7109375D, Style = (UInt32Value)298U, CustomWidth = true };
+            Column column2 = new Column() { Min = (UInt32Value)2U, Max = (UInt32Value)2U, Width = 12D, Style = (UInt32Value)298U, BestFit = true, CustomWidth = true };
+            Column column3 = new Column() { Min = (UInt32Value)3U, Max = (UInt32Value)3U, Width = 8.85546875D, Style = (UInt32Value)298U };
+            Column column4 = new Column() { Min = (UInt32Value)4U, Max = (UInt32Value)4U, Width = 11.140625D, Style = (UInt32Value)298U, CustomWidth = true };
+            Column column5 = new Column() { Min = (UInt32Value)5U, Max = (UInt32Value)5U, Width = 18D, Style = (UInt32Value)269U, BestFit = true, CustomWidth = true };
+            Column column6 = new Column() { Min = (UInt32Value)6U, Max = (UInt32Value)6U, Width = 15.7109375D, Style = (UInt32Value)269U, CustomWidth = true };
+            Column column7 = new Column() { Min = (UInt32Value)7U, Max = (UInt32Value)7U, Width = 9.42578125D, Style = (UInt32Value)298U, CustomWidth = true };
+            Column column8 = new Column() { Min = (UInt32Value)8U, Max = (UInt32Value)8U, Width = 10.140625D, Style = (UInt32Value)298U, CustomWidth = true };
+            Column column9 = new Column() { Min = (UInt32Value)9U, Max = (UInt32Value)9U, Width = 8.85546875D, Style = (UInt32Value)298U };
+            Column column10 = new Column() { Min = (UInt32Value)10U, Max = (UInt32Value)10U, Width = 9.7109375D, Style = (UInt32Value)298U, CustomWidth = true };
+            Column column11 = new Column() { Min = (UInt32Value)11U, Max = (UInt32Value)11U, Width = 11.42578125D, Style = (UInt32Value)298U, CustomWidth = true };
+            Column column12 = new Column() { Min = (UInt32Value)12U, Max = (UInt32Value)12U, Width = 8.85546875D, Style = (UInt32Value)298U, CustomWidth = true };
+            Column column13 = new Column() { Min = (UInt32Value)13U, Max = (UInt32Value)16384U, Width = 8.85546875D, Style = (UInt32Value)298U };
+
+            columns1.Append(column1);
+            columns1.Append(column2);
+            columns1.Append(column3);
+            columns1.Append(column4);
+            columns1.Append(column5);
+            columns1.Append(column6);
+            columns1.Append(column7);
+            columns1.Append(column8);
+            columns1.Append(column9);
+            columns1.Append(column10);
+            columns1.Append(column11);
+            columns1.Append(column12);
+            columns1.Append(column13);
+            return columns1;
+        }
+
+        // Creates an PageMargins instance and adds its children.
+        public PageMargins GeneratePageMargins()
+        {
+            PageMargins pageMargins1 = new PageMargins() { Left = 0.7D, Right = 0.7D, Top = 1.2D, Bottom = 0.75D, Header = 0.3D, Footer = 0.3D };
+            return pageMargins1;
+        }
+
+        // Creates an HeaderFooter instance and adds its children.
+        public HeaderFooter GenerateHeaderFooter()
+        {
+            HeaderFooter headerFooter1 = new HeaderFooter();
+            OddHeader oddHeader1 = new OddHeader();
+            oddHeader1.Text = "&C&\"-,Bold\"&12TABLE 2B\nSummary of Flow Meter Readings&11\n&10 &11 4&Xth&X Quarter 2015 Remediation Status Report\nMountain View Nitrate Plume Restoration Project";
+            OddFooter oddFooter1 = new OddFooter();
+            oddFooter1.Text = "&L&G&RPage &P of &N";
+
+            headerFooter1.Append(oddHeader1);
+            headerFooter1.Append(oddFooter1);
+            return headerFooter1;
+        }
+
+        private ISeriesFormatter GetExtractionOrEffluentSeries(IChartMediator chartMediator, string originalName, string newName)
         {
             ISeriesFormatter seriesFormatter;
             if (chartMediator.HasSeries(originalName))
@@ -145,71 +221,6 @@ namespace OpenxmlConsoleApplication
             return seriesFormatter;
         }
 
-        private static void PrintStationRates(List<Tuple<string, int, double>> stationRates)
-        {
-            using (StreamWriter writer = new StreamWriter("output.csv"))
-            {
-
-                foreach (var field in stationRates)
-                {
-                    Console.WriteLine("{0} {1} {2}", field.Item1, field.Item2, field.Item3);
-                    writer.WriteLine("{0}, Week {1}, {2}, {3}", field.Item1, field.Item2, MountainViewField.GetSundayOfWeek(field.Item2), field.Item3);
-                }
-
-            }
-        }
-
-        private static void PrintWeekRates(Dictionary<int, double> weeklyRates)
-        {
-            using (StreamWriter writer = new StreamWriter("output.txt"))
-            {
-
-                foreach (var field in weeklyRates)
-                {
-                    Console.WriteLine("{0} {1}", field.Key, field.Value);
-                    writer.WriteLine("{0} {1}", field.Key, field.Value);
-                }
-
-            }
-        }
-
-        private static void PrintFields(IEnumerable<MountainViewField> rpwFields)
-        {
-            using (StreamWriter writer = new StreamWriter("output.txt"))
-            {
-
-                foreach (var field in rpwFields)
-                {
-                    Console.WriteLine("{0} {1}", field.GetWeek(), field.MeasureTime);
-                    writer.WriteLine("{0} {1}", field.GetWeek(), field.MeasureTime);
-                }
-
-            }
-        }
-
-        private static void PrintTime(List<SharedStringItem> sharedStringList, IEnumerable<Row> rpwRows)
-        {
-            foreach (var row in rpwRows)
-            {
-                Console.WriteLine(row.RowIndex.Value);
-
-                Cell cell = row.ChildElements.ElementAt(1) as Cell;
-
-                if (cell.DataType == "s")
-                {
-                    row.CloneNode(true);
-                    var sharedIndex = int.Parse(cell.CellValue.Text);
-                    Console.Write("{0} ", sharedStringList[sharedIndex].Text.Text);
-                }
-                else
-                {
-                    Console.Write("{0} ", cell.CellValue.Text);
-                }
-
-                Console.Write("\r\n");
-            }
-        }   
-
         private static void CopyWorkbook(string docName, string newDocumentName)
         {
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(docName, false))
@@ -220,6 +231,6 @@ namespace OpenxmlConsoleApplication
                     newDocument.AddPart(part.OpenXmlPart, part.RelationshipId);
                 }
             }
-        }        
+        }
     }
 }
