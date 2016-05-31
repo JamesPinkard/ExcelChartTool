@@ -18,12 +18,18 @@ namespace OpenXMLTools
             return new WorksheetWriter(worksheetPart, _workbookPart);
         }
 
+
         public WorksheetWriter CreateWorksheetWriter(string worksheetName, CellReference cellReference)
         {
             WorksheetPart worksheetPart = AddWorksheet( worksheetName);
             return new WorksheetWriter(worksheetPart, _workbookPart, cellReference);
         }
 
+        public SheetDataWriter CreateSheetDataWriter(string worksheetName, CellReference cellReference)
+        {
+            WorksheetPart worksheetPart = AddWorksheet(worksheetName);
+            return new SheetDataWriter(worksheetPart, _workbookPart, cellReference);
+        }
 
         private WorksheetPart AddWorksheet(string worksheetName)
         {

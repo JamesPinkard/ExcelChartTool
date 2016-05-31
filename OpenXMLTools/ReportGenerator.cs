@@ -60,26 +60,15 @@ namespace OpenXMLTools
 
                 // ATTEMPT TO WRITE RECORDS
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);
-                Table2bGenerator tableGenerator = new Table2bGenerator(workbookWriter);
 
+                Table2bGenerator tableGenerator = new Table2bGenerator(workbookWriter);
                 var worksheetWriter = tableGenerator.GenerateWriter("records", new CellReference(2, 2));
                 var rangeProcessor = new RangeProcessor(worksheetWriter);
                 var sheetRange = rangeProcessor.AddRecords(records);
                 var influentSheetRange = rangeProcessor.AddRecords(influentRecords);
                 rangeProcessor.WriteRecords();
+                tableGenerator.FormatWorksheet(worksheetWriter.GetWorksheetPart());
 
-                //tableGenerator.FormatWorksheet(worksheetWriter.GetWorksheetPart());
-                var cumulativeWorksheetPart = worksheetWriter.GetWorksheetPart();
-                var cumulativeFormatter = new WorksheetFormatter(cumulativeWorksheetPart);
-
-                // ATTEMPT TO FORMAT PAGE
-                FormatTableBColumns(cumulativeWorksheetPart);
-                cumulativeFormatter.FormatSheet();
-                FormatTableBHeaders(cumulativeWorksheetPart);
-
-                //var values = worksheetQuery.GetStationValues();
-                //var valueWriter = new RecordWriter(@"rpw_output.csv");
-                //valueWriter.Write(values);
 
                 var chartLibrary = new ChartLibrary(spreadsheetDocument);
                 var scatterChartMediator = chartLibrary.GetScatterChartMediator(sumChartSheetName);
@@ -109,12 +98,15 @@ namespace OpenXMLTools
                 var stationTableParserForReport = new StationTableParser();
                 var stationReport = new QuarterlyReport(fields, stationTableParserForReport);
                 var reportRecords = stationReport.ProcessReport();
-                var stationReportWriter = workbookWriter.CreateWorksheetWriter("stationReport", new CellReference(2, 2));
+
+                Table2aGenerator table2a = new Table2aGenerator(workbookWriter);
+                var stationReportWriter = table2a.GenerateWriter("stationReport", new CellReference(2, 2));
                 stationReportWriter.WriteRecords(reportRecords);
 
                 var reportWorksheetPart = stationReportWriter.GetWorksheetPart();
-                var reportFormatter = new WorksheetFormatter(reportWorksheetPart);
-                reportFormatter.FormatSheet();
+                table2a.FormatWorksheet(reportWorksheetPart);
+                //var reportFormatter = new WorksheetFormatter(reportWorksheetPart);
+                //reportFormatter.FormatSheet();
             }
 
             System.Diagnostics.Process.Start(newDocumentName);

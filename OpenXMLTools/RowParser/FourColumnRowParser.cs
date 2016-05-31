@@ -34,9 +34,9 @@ namespace OpenXMLTools
             Cell timeCell = (Cell)row.ChildElements.ElementAt(2);
             if (isValid(timeCell))
             {
-                DateTime time = _cellParser.ParseTime(timeCell);
-                date.AddHours(time.Hour);
-                date.AddMinutes(time.Minute);
+                DateTime time = _cellParser.ParseTime(timeCell);                
+                date = date.AddHours(time.Hour);
+                date = date.AddMinutes(time.Minute);
             }
 
             return date;

@@ -9,12 +9,12 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace OpenXMLTools
 {
-    public class Table2bGenerator
+    public class Table2aGenerator
     {
         private WorkbookWriter _workbookWriter;
         private WorksheetFormatter _worksheetFormatter;
 
-        public Table2bGenerator(WorkbookWriter workbookWriter)
+        public Table2aGenerator(WorkbookWriter workbookWriter)
         {
             _workbookWriter = workbookWriter;            
         }
@@ -44,8 +44,7 @@ namespace OpenXMLTools
             worksheet1.Append(printOptions1);
             worksheet1.Append(pageMargins1);
             worksheet1.Append(pageSetup1);
-            worksheet1.Append(headerFooter1);
-            worksheet1.Append(ignoredErrors1);
+            worksheet1.Append(headerFooter1);            
             worksheet1.Append(legacyDrawingHeaderFooter1);
         }
 
@@ -160,16 +159,17 @@ namespace OpenXMLTools
 
         private static SheetDimension GetSheetDimension()
         {
-            return new SheetDimension() { Reference = "B2:L120" };
+            SheetDimension sheetDimension1 = new SheetDimension() { Reference = "A2:AD1525" };
+            return sheetDimension1;
         }
 
         private static SheetViews GetSheetViews()
         {
             SheetViews sheetViews1 = new SheetViews();
 
-            SheetView sheetView1 = new SheetView() { WorkbookViewId = (UInt32Value)0U };
+            SheetView sheetView1 = new SheetView() { ZoomScale = (UInt32Value)85U, ZoomScaleNormal = (UInt32Value)85U, WorkbookViewId = (UInt32Value)0U };
             Pane pane1 = new Pane() { VerticalSplit = 2D, TopLeftCell = "A3", ActivePane = PaneValues.BottomLeft, State = PaneStateValues.Frozen };
-            Selection selection1 = new Selection() { Pane = PaneValues.BottomLeft, ActiveCell = "L83", SequenceOfReferences = new ListValue<StringValue>() { InnerText = "L83" } };
+            Selection selection1 = new Selection() { Pane = PaneValues.BottomLeft, ActiveCell = "J16", SequenceOfReferences = new ListValue<StringValue>() { InnerText = "J16:J18" } };
 
             sheetView1.Append(pane1);
             sheetView1.Append(selection1);
@@ -187,19 +187,22 @@ namespace OpenXMLTools
         private static Columns GetColumns()
         {
             Columns columns1 = new Columns();
-            Column column1 = new Column() { Min = (UInt32Value)1U, Max = (UInt32Value)1U, Width = 3.7109375D, Style = (UInt32Value)298U, CustomWidth = true };
-            Column column2 = new Column() { Min = (UInt32Value)2U, Max = (UInt32Value)2U, Width = 12D, Style = (UInt32Value)298U, BestFit = true, CustomWidth = true };
-            Column column3 = new Column() { Min = (UInt32Value)3U, Max = (UInt32Value)3U, Width = 8.85546875D, Style = (UInt32Value)298U };
-            Column column4 = new Column() { Min = (UInt32Value)4U, Max = (UInt32Value)4U, Width = 11.140625D, Style = (UInt32Value)298U, CustomWidth = true };
-            Column column5 = new Column() { Min = (UInt32Value)5U, Max = (UInt32Value)5U, Width = 18D, Style = (UInt32Value)269U, BestFit = true, CustomWidth = true };
-            Column column6 = new Column() { Min = (UInt32Value)6U, Max = (UInt32Value)6U, Width = 15.7109375D, Style = (UInt32Value)269U, CustomWidth = true };
-            Column column7 = new Column() { Min = (UInt32Value)7U, Max = (UInt32Value)7U, Width = 9.42578125D, Style = (UInt32Value)298U, CustomWidth = true };
-            Column column8 = new Column() { Min = (UInt32Value)8U, Max = (UInt32Value)8U, Width = 10.140625D, Style = (UInt32Value)298U, CustomWidth = true };
-            Column column9 = new Column() { Min = (UInt32Value)9U, Max = (UInt32Value)9U, Width = 8.85546875D, Style = (UInt32Value)298U };
-            Column column10 = new Column() { Min = (UInt32Value)10U, Max = (UInt32Value)10U, Width = 9.7109375D, Style = (UInt32Value)298U, CustomWidth = true };
-            Column column11 = new Column() { Min = (UInt32Value)11U, Max = (UInt32Value)11U, Width = 11.42578125D, Style = (UInt32Value)298U, CustomWidth = true };
-            Column column12 = new Column() { Min = (UInt32Value)12U, Max = (UInt32Value)12U, Width = 8.85546875D, Style = (UInt32Value)298U, CustomWidth = true };
-            Column column13 = new Column() { Min = (UInt32Value)13U, Max = (UInt32Value)16384U, Width = 8.85546875D, Style = (UInt32Value)298U };
+            Column column1 = new Column() { Min = (UInt32Value)1U, Max = (UInt32Value)1U, Width = 2.28515625D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column2 = new Column() { Min = (UInt32Value)2U, Max = (UInt32Value)2U, Width = 8.85546875D, Style = (UInt32Value)3U };
+            Column column3 = new Column() { Min = (UInt32Value)3U, Max = (UInt32Value)3U, Width = 16.7109375D, Style = (UInt32Value)3U, BestFit = true, CustomWidth = true };
+            Column column4 = new Column() { Min = (UInt32Value)4U, Max = (UInt32Value)4U, Width = 7.5703125D, Style = (UInt32Value)3U, BestFit = true, CustomWidth = true };
+            Column column5 = new Column() { Min = (UInt32Value)5U, Max = (UInt32Value)5U, Width = 13.28515625D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column6 = new Column() { Min = (UInt32Value)6U, Max = (UInt32Value)6U, Width = 10.85546875D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column7 = new Column() { Min = (UInt32Value)7U, Max = (UInt32Value)9U, Width = 11.5703125D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column8 = new Column() { Min = (UInt32Value)10U, Max = (UInt32Value)10U, Width = 10.5703125D, Style = (UInt32Value)3U, BestFit = true, CustomWidth = true };
+            Column column9 = new Column() { Min = (UInt32Value)11U, Max = (UInt32Value)11U, Width = 9.7109375D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column10 = new Column() { Min = (UInt32Value)12U, Max = (UInt32Value)12U, Width = 2.5703125D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column11 = new Column() { Min = (UInt32Value)13U, Max = (UInt32Value)13U, Width = 11.5703125D, Style = (UInt32Value)37U, CustomWidth = true };
+            Column column12 = new Column() { Min = (UInt32Value)14U, Max = (UInt32Value)15U, Width = 10.85546875D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column13 = new Column() { Min = (UInt32Value)16U, Max = (UInt32Value)16U, Width = 11.85546875D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column14 = new Column() { Min = (UInt32Value)17U, Max = (UInt32Value)17U, Width = 13.28515625D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column15 = new Column() { Min = (UInt32Value)18U, Max = (UInt32Value)18U, Width = 11.42578125D, Style = (UInt32Value)3U, CustomWidth = true };
+            Column column16 = new Column() { Min = (UInt32Value)19U, Max = (UInt32Value)16384U, Width = 8.85546875D, Style = (UInt32Value)3U };
 
             columns1.Append(column1);
             columns1.Append(column2);
@@ -214,7 +217,11 @@ namespace OpenXMLTools
             columns1.Append(column11);
             columns1.Append(column12);
             columns1.Append(column13);
+            columns1.Append(column14);
+            columns1.Append(column15);
+            columns1.Append(column16);
             return columns1;
+
         }
 
         private static MergeCells GetMergeCells()
@@ -252,14 +259,15 @@ namespace OpenXMLTools
 
         private static PageSetup GetPageSetup()
         {
-            return new PageSetup() { FitToHeight = (UInt32Value)14U, Orientation = OrientationValues.Portrait, Id = "rId1" };
+            PageSetup pageSetup1 = new PageSetup() { Scale = (UInt32Value)80U, FitToHeight = (UInt32Value)58U, Orientation = OrientationValues.Portrait, HorizontalDpi = (UInt32Value)1200U, VerticalDpi = (UInt32Value)1200U, Id = "rId1" };
+            return pageSetup1;
         }
 
         private static HeaderFooter GetHeaderFooter()
         {
             HeaderFooter headerFooter1 = new HeaderFooter();
-            OddHeader oddHeader1 = new OddHeader();
-            oddHeader1.Text = "&C&\"-,Bold\"&12TABLE 2B\nSummary of Flow Meter Readings&11\n&10 &11 4&Xth&X Quarter 2015 Remediation Status Report\nMountain View Nitrate Plume Restoration Project";
+            OddHeader oddHeader1 = new OddHeader() { Space = SpaceProcessingModeValues.Preserve };
+            oddHeader1.Text = "&C&\"-,Bold\"&12TABLE 2A\nFlow Meter Readings for Extraction and Injection Wells&11\n &10 &11 1&Xst&X Quarter 2016 Remediation Status Report\nMountain View Nitrate Plume Restoration Project ";
             OddFooter oddFooter1 = new OddFooter();
             oddFooter1.Text = "&L&G&RPage &P of &N";
 
@@ -270,16 +278,14 @@ namespace OpenXMLTools
 
         private static IgnoredErrors GetIgnoredErrors()
         {
-            IgnoredErrors ignoredErrors1 = new IgnoredErrors();
-            IgnoredError ignoredError1 = new IgnoredError() { SequenceOfReferences = new ListValue<StringValue>() { InnerText = "F31" }, Formula = true };
-
-            ignoredErrors1.Append(ignoredError1);
+            IgnoredErrors ignoredErrors1 = new IgnoredErrors();            
             return ignoredErrors1;
         }
 
         private static LegacyDrawingHeaderFooter GetLegacyHeaderFooter()
         {
-            return new LegacyDrawingHeaderFooter() { Id = "rId2" };
+            LegacyDrawingHeaderFooter legacyDrawingHeaderFooter1 = new LegacyDrawingHeaderFooter() { Id = "rId2" };
+            return legacyDrawingHeaderFooter1;
         }
 
         #region Binary Data

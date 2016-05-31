@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace OpenXMLTools
 {
@@ -25,7 +26,7 @@ namespace OpenXMLTools
         public override List<Cell> GetFilledCells()
         {
             List<Cell> cellList = new List<Cell>();
-            cellList.Add(new Cell { CellValue = new CellValue(_name.ToString()), DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue(_name.ToString()), StyleIndex = (UInt32Value)286U, DataType = CellValues.String });
             cellList.AddRange(_cumulativeRecord.GetFilledCells());
             
             return cellList;
@@ -34,7 +35,7 @@ namespace OpenXMLTools
         public override List<Cell> GetHeader()
         {
             List<Cell> cellList = new List<Cell>();
-            cellList.Add(new Cell { CellValue = new CellValue("Station Name"), DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Station Name"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String });
             cellList.AddRange(_cumulativeRecord.GetHeader());
             return cellList;
         }

@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Drawing.Spreadsheet;
-
-using DrawingChart = DocumentFormat.OpenXml.Drawing.Charts.Chart;
-using DrawingValues = DocumentFormat.OpenXml.Drawing.Charts.Values;
-
-using OpenXMLTools;
 
 namespace OpenXMLTools
 {

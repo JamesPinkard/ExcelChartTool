@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace OpenXMLTools
 {
@@ -20,20 +21,20 @@ namespace OpenXMLTools
         public override List<Cell> GetFilledCells()
         {
             List<Cell> cellList = _record.GetFilledCells();
-            cellList.Add(new Cell { CellValue = new CellValue(string.Format("Week {0}", _weekIndex)), DataType = CellValues.String });
-            cellList.Add(new Cell { CellValue = new CellValue(_cumulativeTime.ToString()), DataType = CellValues.Number });
-            cellList.Add(new Cell { CellValue = new CellValue(_cumulativeFlow.ToString()), DataType = CellValues.Number });
-            cellList.Add(new Cell { CellValue = new CellValue(_averageFlow.ToString()), DataType = CellValues.Number });
+            cellList.Add(new Cell { CellValue = new CellValue(string.Format("Week {0}", _weekIndex)), StyleIndex = (UInt32Value)294U, DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue(_cumulativeTime.ToString()), StyleIndex = (UInt32Value)282U, DataType = CellValues.Number });
+            cellList.Add(new Cell { CellValue = new CellValue(_cumulativeFlow.ToString()), StyleIndex = (UInt32Value)282U, DataType = CellValues.Number });
+            cellList.Add(new Cell { CellValue = new CellValue(_averageFlow.ToString()), StyleIndex = (UInt32Value)281U, DataType = CellValues.Number });
             return cellList;
         }
 
         public override List<Cell> GetHeader()
         {
             List<Cell> cellList = _record.GetHeader();
-            cellList.Add(new Cell { CellValue = new CellValue("Week #\n"), DataType = CellValues.String });
-            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Time"), DataType = CellValues.String });
-            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Flow"), DataType = CellValues.String });
-            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Flow Rate\n (GPM)"), DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Week #\n"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Time"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Flow"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Weekly Cumulative\n Flow Rate\n (GPM)"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String });
             return cellList;
         }
 

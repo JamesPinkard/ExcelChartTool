@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace OpenXMLTools
 {
@@ -27,7 +28,7 @@ namespace OpenXMLTools
 
                 for (int i = 0; i < padding; i++)
                 {
-                    filledCells.Add(new Cell());
+                    filledCells.Add(new Cell() { StyleIndex = (UInt32Value)282U });
                 }
             }
 

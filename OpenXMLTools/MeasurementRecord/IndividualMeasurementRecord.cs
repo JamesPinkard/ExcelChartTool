@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace OpenXMLTools
 {
@@ -27,11 +28,11 @@ namespace OpenXMLTools
         {
             return new List<Cell>()
             {
-                new Cell { CellValue = new CellValue(StationName), DataType = CellValues.String},
-                new Cell { CellValue = new CellValue(MeasureTime.ToOADate().ToString()), StyleIndex = 5},
-                new Cell { CellValue = new CellValue(TotalizerReading.ToString()), DataType = CellValues.Number},
-                new Cell { CellValue = new CellValue(CumulativeTime.ToString()), DataType = CellValues.Number },
-                new Cell { CellValue = new CellValue(CumulativeFlow.ToString()), DataType = CellValues.Number}
+                new Cell { CellValue = new CellValue(StationName), StyleIndex = (UInt32Value)286U, DataType = CellValues.String},
+                new Cell { CellValue = new CellValue(MeasureTime.ToOADate().ToString()), StyleIndex = (UInt32Value)287U},
+                new Cell { CellValue = new CellValue(TotalizerReading.ToString()), StyleIndex = (UInt32Value)290U, DataType = CellValues.Number},
+                new Cell { CellValue = new CellValue(CumulativeTime.ToString()), StyleIndex = (UInt32Value)285U, DataType = CellValues.Number },
+                new Cell { CellValue = new CellValue(CumulativeFlow.ToString()), StyleIndex = (UInt32Value)284U, DataType = CellValues.Number}
             };
         }
 
@@ -39,11 +40,11 @@ namespace OpenXMLTools
         {
             return new List<Cell>()
             {
-                new Cell { CellValue = new CellValue("Station"), DataType = CellValues.String},
-                new Cell { CellValue = new CellValue("Date and Time"), DataType = CellValues.String},
-                new Cell { CellValue = new CellValue("Total Flow\n (gal)"), DataType = CellValues.String},
-                new Cell { CellValue = new CellValue("Cumulative Time\n (min)"), DataType = CellValues.String},
-                new Cell { CellValue = new CellValue("Cumulative Flow\n (gal)"), DataType = CellValues.String}
+                new Cell { CellValue = new CellValue("Station"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Date and Time"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Total Flow\n (gal)"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Cumulative Time\n (min)"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String},
+                new Cell { CellValue = new CellValue("Cumulative Flow\n (gal)"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String}
             };
         }
     }

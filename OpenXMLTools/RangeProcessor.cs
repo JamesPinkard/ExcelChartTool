@@ -8,10 +8,10 @@ namespace OpenXMLTools
 {
     public class RangeProcessor
     {
-        public RangeProcessor(IRecordWriter worksheetWriter)
+        public RangeProcessor(IRecordWriter recordWriter)
         {
-            _worksheetWriter = worksheetWriter;
-            _bottomOfRange = _worksheetWriter.GetStartingCell().RowIndex;
+            _recordWriter = recordWriter;
+            _bottomOfRange = _recordWriter.GetStartingCell().RowIndex;
         }
 
         public WorksheetRange AddRecords(IEnumerable<IRecord> records)
@@ -25,17 +25,17 @@ namespace OpenXMLTools
             int topOfRange = _bottomOfRange + 1;
             _bottomOfRange += records.Count();
 
-            return new WorksheetRange(_worksheetWriter.GetSheetName(), topOfRange, _bottomOfRange);
+            return new WorksheetRange(_recordWriter.GetSheetName(), topOfRange, _bottomOfRange);
         }
 
         public void WriteRecords()
         {
-            _worksheetWriter.WriteRecords(_records);
+            _recordWriter.WriteRecords(_records);
         }
 
         // because of header bottom of range sta
         int _bottomOfRange;        
         List<IRecord> _records = new List<IRecord>();
-        IRecordWriter _worksheetWriter;
+        IRecordWriter _recordWriter;
     }
 }

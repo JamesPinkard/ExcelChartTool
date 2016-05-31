@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace OpenXMLTools
 {
@@ -18,14 +19,14 @@ namespace OpenXMLTools
         public override List<Cell> GetFilledCells()
         {
             List<Cell> cellList = _weekRecord.GetFilledCells();
-            cellList.Add(new Cell { CellValue = new CellValue(_averageFlow.ToString()), DataType = CellValues.Number });
+            cellList.Add(new Cell { CellValue = new CellValue(_averageFlow.ToString()), StyleIndex = (UInt32Value)293U, DataType = CellValues.Number });
             return cellList;
         }
 
         public override List<Cell> GetHeader()
         {
             List<Cell> cellList = _weekRecord.GetHeader();
-            cellList.Add(new Cell { CellValue = new CellValue("Quarterly Flow Rate \n (GPM)"), DataType = CellValues.String });
+            cellList.Add(new Cell { CellValue = new CellValue("Quarterly Flow Rate \n (GPM)"), StyleIndex = (UInt32Value)297U, DataType = CellValues.String });
             return cellList;
         }
 
