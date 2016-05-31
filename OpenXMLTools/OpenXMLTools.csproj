@@ -57,6 +57,7 @@
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="FieldWeekDictionary.cs" />
+    <Compile Include="IRecordWriter.cs" />
     <Compile Include="MeasurementRecordParserSwap.cs" />
     <Compile Include="MeasurementRecord\NamedCumulativeRecord.cs" />
     <Compile Include="MeasurementRecord\QuarterCumulativeRecord.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Charts\ScatterChartMediator.cs" />
     <Compile Include="QuarterState\SecondQuarterState.cs" />
     <Compile Include="ReportGenerator.cs" />
+    <Compile Include="SheetDataWriter.cs" />
     <Compile Include="StationNameFieldFilter.cs" />
     <Compile Include="StationReport.cs" />
     <Compile Include="StationTableParser.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="RowParser\ThreeColumnRowParser.cs" />
     <Compile Include="FieldProcessor.cs" />
     <Compile Include="QuarterState\ThirdQuarterState.cs" />
+    <Compile Include="Table2bGenerator.cs" />
     <Compile Include="UniqueWeekFieldQuery.cs" />
     <Compile Include="MeasurementRecord\WeekMeasurementRecord.cs" />
     <Compile Include="WeekRecordParser.cs" />

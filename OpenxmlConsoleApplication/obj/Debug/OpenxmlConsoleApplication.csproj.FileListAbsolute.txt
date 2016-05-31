@@ -25,3 +25,12 @@ C:\Users\James\Desktop\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\Docume
 C:\Users\James\Desktop\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\OpenXMLTools.dll
 C:\Users\James\Desktop\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\OpenXMLTools.pdb
 C:\Users\James\Desktop\ExcelChartTool\OpenxmlConsoleApplication\obj\Debug\OpenxmlConsoleApplication.csprojResolveAssemblyReference.cache
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\OpenxmlConsoleApplication.exe.config
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\obj\Debug\OpenxmlConsoleApplication.exe
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\obj\Debug\OpenxmlConsoleApplication.pdb
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\OpenxmlConsoleApplication.exe
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\OpenxmlConsoleApplication.pdb
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\OpenXMLTools.dll
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\bin\Debug\OpenXMLTools.pdb
+C:\Users\James\Documents\GitHub\ExcelChartTool\OpenxmlConsoleApplication\obj\Debug\OpenxmlConsoleApplication.csprojResolveAssemblyReference.cache

@@ -8,7 +8,7 @@ namespace OpenXMLTools
 {
     public class RangeProcessor
     {
-        public RangeProcessor(WorksheetWriter worksheetWriter)
+        public RangeProcessor(IRecordWriter worksheetWriter)
         {
             _worksheetWriter = worksheetWriter;
             _bottomOfRange = _worksheetWriter.GetStartingCell().RowIndex;
@@ -36,6 +36,6 @@ namespace OpenXMLTools
         // because of header bottom of range sta
         int _bottomOfRange;        
         List<IRecord> _records = new List<IRecord>();
-        WorksheetWriter _worksheetWriter;
+        IRecordWriter _worksheetWriter;
     }
 }

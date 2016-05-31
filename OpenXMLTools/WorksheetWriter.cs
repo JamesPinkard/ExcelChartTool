@@ -19,7 +19,7 @@ using OpenXMLTools;
 
 namespace OpenXMLTools
 {
-    public class WorksheetWriter
+    public class WorksheetWriter : IRecordWriter
     {
         public WorksheetWriter(WorksheetPart worksheetPart, WorkbookPart workbookPart):this(worksheetPart, workbookPart, new CellReference(1, 1))
         {

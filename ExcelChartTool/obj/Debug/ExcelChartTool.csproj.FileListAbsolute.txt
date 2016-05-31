@@ -12,3 +12,17 @@ C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\ExcelChar
 C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.csproj.GenerateResource.Cache
 C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.exe
 C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.pdb
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\bin\Debug\ExcelChartTool.exe.config
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\bin\Debug\ExcelChartTool.exe
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\bin\Debug\ExcelChartTool.pdb
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.csprojResolveAssemblyReference.cache
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\MainWindow.g.cs
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\App.g.cs
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool_MarkupCompile.cache
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool_MarkupCompile.lref
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\MainWindow.baml
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.g.resources
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.Properties.Resources.resources
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.csproj.GenerateResource.Cache
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.exe
+C:\Users\James\Documents\GitHub\ExcelChartTool\ExcelChartTool\obj\Debug\ExcelChartTool.pdb

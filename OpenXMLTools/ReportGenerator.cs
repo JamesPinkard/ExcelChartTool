@@ -60,12 +60,15 @@ namespace OpenXMLTools
 
                 // ATTEMPT TO WRITE RECORDS
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);
-                var worksheetWriter = workbookWriter.CreateWorksheetWriter("records", new CellReference(2, 2));
+                Table2bGenerator tableGenerator = new Table2bGenerator(workbookWriter);
+
+                var worksheetWriter = tableGenerator.GenerateWriter("records", new CellReference(2, 2));
                 var rangeProcessor = new RangeProcessor(worksheetWriter);
                 var sheetRange = rangeProcessor.AddRecords(records);
                 var influentSheetRange = rangeProcessor.AddRecords(influentRecords);
                 rangeProcessor.WriteRecords();
 
+                //tableGenerator.FormatWorksheet(worksheetWriter.GetWorksheetPart());
                 var cumulativeWorksheetPart = worksheetWriter.GetWorksheetPart();
                 var cumulativeFormatter = new WorksheetFormatter(cumulativeWorksheetPart);
 
