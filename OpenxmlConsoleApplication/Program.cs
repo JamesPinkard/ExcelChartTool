@@ -73,8 +73,8 @@ namespace OpenxmlConsoleApplication
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);
                 var worksheetWriter = workbookWriter.CreateWorksheetWriter("records", new CellReference(2, 2));
                 var rangeProcessor = new RangeProcessor(worksheetWriter);
-                var sheetRange = rangeProcessor.AddRecords(records);
                 var influentSheetRange = rangeProcessor.AddRecords(influentRecords);
+                var sheetRange = rangeProcessor.AddRecords(records);
                 rangeProcessor.WriteRecords();
 
                 var cumulativeWorksheetPart = worksheetWriter.GetWorksheetPart();

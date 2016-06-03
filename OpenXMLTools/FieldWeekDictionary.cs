@@ -72,26 +72,29 @@ namespace OpenXMLTools
 
         private void SetWeek(int weekIndex)
         {
+
             var fields = _weeklyMeasurements[weekIndex];
             var orderedFields = fields.OrderBy(f => f.MeasureTime);
-            _firstField = orderedFields.First();
-            _lastField = orderedFields.Last();
 
-            if (_firstField == _lastField)
+            int alternativeIndex = _verifier.GetAlternativeIndex(weekIndex);
+            var alternativeField = _weeklyMeasurements[alternativeIndex].OrderBy(f => f.MeasureTime);
+
+            if (weekIndex == 1)
             {
-
-                int alternativeIndex = _verifier.GetAlternativeIndex(weekIndex);
-                var alternativeField = _weeklyMeasurements[alternativeIndex].OrderBy(f => f.MeasureTime);
-
+                _firstField = orderedFields.First();
+                _lastField = orderedFields.Last();
+            }
+            else
+            {
                 if (weekIndex > alternativeIndex)
                 {
-                    _firstField = orderedFields.First();
-                    _lastField = alternativeField.First();
+                    _lastField = orderedFields.Last();
+                    _firstField = alternativeField.Last();
                 }
                 else
                 {
-                    _firstField = alternativeField.Last();
-                    _lastField = orderedFields.Last();
+                    _lastField = alternativeField.First();
+                    _firstField = orderedFields.First();
                 }
             }
         }

@@ -29,7 +29,7 @@ namespace OpenXMLTools
                     ResetQuarterState();
                     var fieldDict = new FieldWeekDictionary(quarterFields);
                     quarterTables.Add(new QuarterTable(fieldDict));
-                    quarterFields.Clear();
+                    quarterFields = new List<MountainViewField>();
                     quarterFields.Add(field);
                 }
             }
@@ -39,7 +39,7 @@ namespace OpenXMLTools
                 ResetQuarterState();
                 var fieldDict = new FieldWeekDictionary(quarterFields);
                 quarterTables.Add(new QuarterTable(fieldDict));
-                quarterFields.Clear();                
+                quarterFields = new List<MountainViewField>();
             }
 
             return quarterTables;

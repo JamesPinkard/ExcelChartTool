@@ -42,14 +42,6 @@ namespace OpenXMLTools
 
                 var stationTableParser = new StationTableParser();
 
-                // Process effluent data;
-                var quarterParser = new QuarterTableParser(new ThirdQuarterState());
-                var effluentRecordParser = new QuarterRecordParser(quarterParser, "Effluent");
-                var recordQuery = new StationTableRecordQuery(stationTableParser, effluentRecordParser);
-                var effluentFieldFilter = new StationNameFieldFilter("RPW-03");
-                var effluentrecordProcessor = new RecordProcessor(fields, recordQuery, effluentFieldFilter);
-                var records = effluentrecordProcessor.ProcessRecords();
-
                 // Process influent data;
                 var influentquarterParser = new QuarterTableParser(new ThirdQuarterState());
                 var influentRecordParser = new QuarterRecordParser(influentquarterParser, "Influent");
@@ -58,14 +50,23 @@ namespace OpenXMLTools
                 var influentRecordProcessor = new RecordProcessor(fields, influentRecordQuery, influentFieldFilter);
                 var influentRecords = influentRecordProcessor.ProcessRecords();
 
+                // Process effluent data;
+                var quarterParser = new QuarterTableParser(new ThirdQuarterState());
+                var effluentRecordParser = new QuarterRecordParser(quarterParser, "Effluent");
+                var recordQuery = new StationTableRecordQuery(stationTableParser, effluentRecordParser);
+                var effluentFieldFilter = new StationNameFieldFilter("RPW-03");
+                var effluentrecordProcessor = new RecordProcessor(fields, recordQuery, effluentFieldFilter);
+                var records = effluentrecordProcessor.ProcessRecords();
+
+
                 // ATTEMPT TO WRITE RECORDS
                 WorkbookWriter workbookWriter = new WorkbookWriter(spreadsheetDocument.WorkbookPart);
 
                 Table2bGenerator tableGenerator = new Table2bGenerator(workbookWriter);
                 var worksheetWriter = tableGenerator.GenerateWriter("records", new CellReference(2, 2));
                 var rangeProcessor = new RangeProcessor(worksheetWriter);
-                var sheetRange = rangeProcessor.AddRecords(records);
                 var influentSheetRange = rangeProcessor.AddRecords(influentRecords);
+                var sheetRange = rangeProcessor.AddRecords(records);
                 rangeProcessor.WriteRecords();
                 tableGenerator.FormatWorksheet(worksheetWriter.GetWorksheetPart());
 

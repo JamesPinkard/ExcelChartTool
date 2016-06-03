@@ -53,10 +53,29 @@ namespace OpenXMLTools
             var quarterTables = _quarterTableParser.Parse(stationFields);
             foreach (var qtable in quarterTables)
             {
-                var qWeek = qtable.GetFields().First().GetWeek();
-                var topField = weekRecords.Where(r => r.Week == qWeek).First();
-                var index = weekRecords.IndexOf(topField);
-                weekRecords[index] = new QuarterCumulativeRecord(topField, qtable.GetAverageWeeklyFlowRate());
+                var firstFieldOfQuarter = qtable.GetFields().First();
+                
+                var indexOfFirstWeekInQuarter = firstFieldOfQuarter.GetWeek();
+                var firstFieldOfWeek = stationFields.Where(f => f.GetWeek() == indexOfFirstWeekInQuarter).First();
+
+
+                CumulativeRecord firstMeasurementOfQuarter;
+                int index;
+
+                if (firstFieldOfQuarter.MeasureTime.Month == firstFieldOfWeek.MeasureTime.Month)
+                {
+                    var firstWeekOfQuarter = weekRecords.Where(r => r.Week == indexOfFirstWeekInQuarter);
+                    firstMeasurementOfQuarter = firstWeekOfQuarter.First();
+                    index = weekRecords.IndexOf(firstMeasurementOfQuarter);
+                }
+                else
+                {
+                    var firstWeekOfQuarter = weekRecords.Where(r => r.Week == indexOfFirstWeekInQuarter);
+                    index = weekRecords.IndexOf(firstWeekOfQuarter.First()) + 1;
+                    firstMeasurementOfQuarter = weekRecords[index];
+                }
+
+                weekRecords[index] = new QuarterCumulativeRecord(firstMeasurementOfQuarter, qtable.GetAverageWeeklyFlowRate());
             }
 
             return weekRecords;
