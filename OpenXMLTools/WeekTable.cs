@@ -16,6 +16,8 @@ namespace OpenXMLTools
             _lastField = lastField;
         }
 
+
+
         public int GetWeek()
         {
             return _weekIndex;

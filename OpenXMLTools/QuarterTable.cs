@@ -8,15 +8,16 @@ namespace OpenXMLTools
 {
     public class QuarterTable
     {
-        public QuarterTable(FieldWeekDictionary fields)
+        public QuarterTable(FieldWeekDictionary fields, MountainViewField previousQuarterField)
         {
             _fields = fields;
+            _previousQuarterField = previousQuarterField;
         }
 
         public double GetAverageWeeklyFlowRate()
         {
             var quarterFields = GetFields();
-            var firstField = quarterFields.First();
+            var firstField = _previousQuarterField;
             var lastField = quarterFields.Last();
 
 
@@ -29,7 +30,20 @@ namespace OpenXMLTools
 
         public WeekTable GetTableForWeek(int weekIndex)
         {
-            return _fields.GetTableForWeek(weekIndex);
+            WeekTable result;
+            if (weekIndex == GetFields().First().GetWeek())
+            {
+                var weekTable = _fields.GetTableForWeek(weekIndex);
+                var weekFields = weekTable.GetFieldsForWeek();
+                var firstField = _previousQuarterField;
+                var lastField = weekFields.Last();
+                result = new WeekTable(weekTable.GetWeek(), weekFields, firstField, lastField);
+            }
+            else
+            {
+                result = _fields.GetTableForWeek(weekIndex);
+            }
+            return result;
         }
 
         public IEnumerable<MountainViewField> GetFields()
@@ -38,5 +52,6 @@ namespace OpenXMLTools
         }
 
         private FieldWeekDictionary _fields;
+        private MountainViewField _previousQuarterField;
     }
 }

@@ -19,8 +19,7 @@ namespace OpenXMLTools
             var uniqueWeekFieldQuery = new UniqueWeekFieldQuery();
 
             var quarterFields = quarter.GetFields();
-            var weeks = uniqueWeekFieldQuery.GetUniqueWeekIndices(quarterFields);
-            _previousField = quarterFields.First();
+            var weeks = uniqueWeekFieldQuery.GetUniqueWeekIndices(quarterFields);            
 
             foreach (var week in weeks)
             {

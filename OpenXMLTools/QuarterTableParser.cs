@@ -17,6 +17,7 @@ namespace OpenXMLTools
         {
             List<QuarterTable> quarterTables = new List<QuarterTable>();
             List<MountainViewField> quarterFields = new List<MountainViewField>();
+            _previousField = fields.First();
 
             foreach (var field in fields)
             {
@@ -28,7 +29,8 @@ namespace OpenXMLTools
                 {
                     ResetQuarterState();
                     var fieldDict = new FieldWeekDictionary(quarterFields);
-                    quarterTables.Add(new QuarterTable(fieldDict));
+                    quarterTables.Add(new QuarterTable(fieldDict, _previousField));
+                    _previousField = quarterFields.Last();
                     quarterFields = new List<MountainViewField>();
                     quarterFields.Add(field);
                 }
@@ -38,7 +40,7 @@ namespace OpenXMLTools
             {
                 ResetQuarterState();
                 var fieldDict = new FieldWeekDictionary(quarterFields);
-                quarterTables.Add(new QuarterTable(fieldDict));
+                quarterTables.Add(new QuarterTable(fieldDict, _previousField));
                 quarterFields = new List<MountainViewField>();
             }
 
@@ -51,5 +53,6 @@ namespace OpenXMLTools
         }
 
         private IQuarterState _quarterState;
+        private MountainViewField _previousField;
     }
 }

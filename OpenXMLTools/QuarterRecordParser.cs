@@ -51,6 +51,7 @@ namespace OpenXMLTools
             var stationFields = stationTables.SelectMany(s => s.GetStationFields())
                 .OrderBy(f => f.MeasureTime);
             var quarterTables = _quarterTableParser.Parse(stationFields);
+
             foreach (var qtable in quarterTables)
             {
                 var firstFieldOfQuarter = qtable.GetFields().First();
@@ -64,12 +65,14 @@ namespace OpenXMLTools
 
                 if (firstFieldOfQuarter.MeasureTime.Month == firstFieldOfWeek.MeasureTime.Month)
                 {
+                    // Set index and first measurement of week
                     var firstWeekOfQuarter = weekRecords.Where(r => r.Week == indexOfFirstWeekInQuarter);
                     firstMeasurementOfQuarter = firstWeekOfQuarter.First();
                     index = weekRecords.IndexOf(firstMeasurementOfQuarter);
                 }
                 else
                 {
+                    // Set index and first measurement of quarter
                     var firstWeekOfQuarter = weekRecords.Where(r => r.Week == indexOfFirstWeekInQuarter);
                     index = weekRecords.IndexOf(firstWeekOfQuarter.First()) + 1;
                     firstMeasurementOfQuarter = weekRecords[index];
