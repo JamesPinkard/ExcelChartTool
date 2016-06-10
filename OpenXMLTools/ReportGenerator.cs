@@ -82,7 +82,7 @@ namespace OpenXMLTools
 
                 var barChartMediator = chartLibrary.GetBarChartMediator(ratesChartSheetName);
                 var effluentSeriesFormatter = GetExtractionOrEffluentSeries(barChartMediator, "Extraction", "Effluent");
-                var weekRateFormula = sheetRange.GetColumnFormula(5);
+                var weekRateFormula = sheetRange.GetColumnFormula(7);
                 effluentSeriesFormatter.SetSeriesFormula(xFormula, weekRateFormula);
 
 
@@ -93,7 +93,7 @@ namespace OpenXMLTools
                 influentScatterSeriesFormatter.SetSeriesFormula(influentFormula, influentVolumeFormula);
 
                 var influentSeriesFormatter = GetExtractionOrEffluentSeries(barChartMediator, "Injection", "Influent");
-                var influentWeekRateFormula = influentSheetRange.GetColumnFormula(5);
+                var influentWeekRateFormula = influentSheetRange.GetColumnFormula(7);
                 influentSeriesFormatter.SetSeriesFormula(influentFormula, influentWeekRateFormula);
 
                 var stationTableParserForReport = new StationTableParser();

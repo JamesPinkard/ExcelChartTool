@@ -13,7 +13,7 @@ namespace OpenXMLTools
             _weekIndex = weekIndex;
             _fields = fields;
             _firstField = firstField;
-            _lastField = lastField;
+            _lastField = lastField;            
         }
 
 

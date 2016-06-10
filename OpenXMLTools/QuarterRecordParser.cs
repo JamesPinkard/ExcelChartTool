@@ -20,7 +20,6 @@ namespace OpenXMLTools
             List<CumulativeRecord> weekRecords = new List<CumulativeRecord>();
             double cumalativeVolume = 0;
 
-
             foreach (var week in weeks)
             {
                 List<double> ratesOfTheWeek = new List<double>();
@@ -48,6 +47,13 @@ namespace OpenXMLTools
                 weekRecords.Add(namedRecord);
             }
 
+            List<QuarterTable> stationQuarterTables = new List<QuarterTable>();
+            foreach (var station in stationTables)
+            {
+                stationQuarterTables.AddRange(_quarterTableParser.Parse(station.GetStationFields()));
+            }
+                    
+
             var stationFields = stationTables.SelectMany(s => s.GetStationFields())
                 .OrderBy(f => f.MeasureTime);
             var quarterTables = _quarterTableParser.Parse(stationFields);
@@ -58,7 +64,6 @@ namespace OpenXMLTools
                 
                 var indexOfFirstWeekInQuarter = firstFieldOfQuarter.GetWeek();
                 var firstFieldOfWeek = stationFields.Where(f => f.GetWeek() == indexOfFirstWeekInQuarter).First();
-
 
                 CumulativeRecord firstMeasurementOfQuarter;
                 int index;
@@ -78,7 +83,12 @@ namespace OpenXMLTools
                     firstMeasurementOfQuarter = weekRecords[index];
                 }
 
-                weekRecords[index] = new QuarterCumulativeRecord(firstMeasurementOfQuarter, qtable.GetAverageWeeklyFlowRate());
+                var quarterFlows = stationQuarterTables.Where(t => qtable.GetFields().Contains(t.GetFields().First()))
+                    .Select(r => r.GetAverageWeeklyFlowRate());
+
+                var quarterCumulative = quarterFlows.Sum();                    
+
+                weekRecords[index] = new QuarterCumulativeRecord(firstMeasurementOfQuarter, quarterCumulative);
             }
 
             return weekRecords;

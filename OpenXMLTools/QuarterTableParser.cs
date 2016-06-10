@@ -11,6 +11,7 @@ namespace OpenXMLTools
         public QuarterTableParser(IQuarterState quarterState)
         {
             _quarterState = quarterState;
+            _originalState = quarterState;
         }
 
         public IEnumerable<QuarterTable> Parse(IEnumerable<MountainViewField> fields)
@@ -44,6 +45,7 @@ namespace OpenXMLTools
                 quarterFields = new List<MountainViewField>();
             }
 
+            ResetToOriginalState();
             return quarterTables;
         }
 
@@ -52,7 +54,13 @@ namespace OpenXMLTools
             _quarterState = _quarterState.NextQuarter();
         }
 
+        private void ResetToOriginalState()
+        {
+            _quarterState = _originalState;
+        }
+
         private IQuarterState _quarterState;
+        private IQuarterState _originalState;
         private MountainViewField _previousField;
     }
 }
