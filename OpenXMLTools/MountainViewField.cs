@@ -36,5 +36,10 @@ namespace OpenXMLTools
         }
         
         private static readonly DateTime _startDay = new DateTime(2015, 6, 14);
+
+        public override string ToString()
+        {
+            return string.Format("Reading({0}, {1}, {2})", StationName, MeasureTime, TotalizerReading);
+        }
     }
 }

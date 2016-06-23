@@ -38,7 +38,10 @@ namespace OpenXMLTools
                 var parser = parserFacory.MakeParser();
 
                 var fieldProcessor = new FieldProcessor(rowTable, parser);
-                var fields = fieldProcessor.ProcessFields();
+                var rawFields = fieldProcessor.ProcessFields();
+
+                var extractionWellModifier = new ExtractionWellFieldModifier();
+                var fields = extractionWellModifier.Modify(rawFields);
 
                 var stationTableParser = new StationTableParser();
 

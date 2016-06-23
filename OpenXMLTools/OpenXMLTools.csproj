@@ -54,9 +54,12 @@
     <Compile Include="Charts\ChartLibrary.cs" />
     <Compile Include="Charts\IChartMediator.cs" />
     <Compile Include="CumulativeRecords\CumulativeRecord.cs" />
+    <Compile Include="CumulativeVolumeChartGenerator.cs" />
+    <Compile Include="ExtractionWellFieldModifier.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="FieldWeekDictionary.cs" />
+    <Compile Include="FlowRateChartGenerator.cs" />
     <Compile Include="IRecordWriter.cs" />
     <Compile Include="MeasurementRecordParserSwap.cs" />
     <Compile Include="CumulativeRecords\NamedCumulativeRecord.cs" />
