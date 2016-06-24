@@ -55,6 +55,8 @@
     <Compile Include="Charts\IChartMediator.cs" />
     <Compile Include="CumulativeRecords\CumulativeRecord.cs" />
     <Compile Include="CumulativeVolumeChartGenerator.cs" />
+    <Compile Include="ExcelExtensionListGenerator.cs" />
+    <Compile Include="ExcelFilePropertiesGenerator.cs" />
     <Compile Include="ExtractionWellFieldModifier.cs" />
     <Compile Include="FieldMapper.cs" />
     <Compile Include="FieldParserFactory.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="MeasurementRecord\WeekMeasurementRecord.cs" />
     <Compile Include="WeekRecordParser.cs" />
     <Compile Include="WeekTable.cs" />
+    <Compile Include="ThemeGenerator.cs" />
     <Compile Include="WorkbookHandler.cs" />
     <Compile Include="RecordProcessor.cs" />
     <Compile Include="CumulativeRecords\WeekCumulativeRecord.cs" />

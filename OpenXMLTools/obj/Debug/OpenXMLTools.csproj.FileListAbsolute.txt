@@ -21,3 +21,4 @@ C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTo
 C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\bin\Debug\DocumentFormat.OpenXml.dll
 C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.dll
 C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.pdb
+C:\Users\jpinkard\documents\visual studio 2015\Projects\ExcelChartTool\OpenXMLTools\obj\Debug\OpenXMLTools.csprojResolveAssemblyReference.cache

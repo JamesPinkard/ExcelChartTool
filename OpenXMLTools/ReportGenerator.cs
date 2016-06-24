@@ -125,9 +125,10 @@ namespace OpenXMLTools
                 stationReportWriter.WriteRecords(reportRecords);
 
                 var reportWorksheetPart = stationReportWriter.GetWorksheetPart();
-                table2a.FormatWorksheet(reportWorksheetPart);
+                table2a.FormatWorksheet(reportWorksheetPart);                
                 //var reportFormatter = new WorksheetFormatter(reportWorksheetPart);
                 //reportFormatter.FormatSheet();
+                
             }
 
             System.Diagnostics.Process.Start(newDocumentName);
@@ -140,13 +141,6 @@ namespace OpenXMLTools
 
             var worksheet = worksheetPart.Worksheet;
             worksheet.SheetFormatProperties = sheetFormatProperties;
-            //worksheet.Append(columns);
-
-            
-            
-            
-            
-            //worksheet.Append(sheetFormatProperties);
         }
 
         public void FormatTableBHeaders(WorksheetPart worksheetPart)
@@ -255,13 +249,15 @@ namespace OpenXMLTools
             using (SpreadsheetDocument newDocument = SpreadsheetDocument.Create(newDocumentName, SpreadsheetDocumentType.Workbook))
             {
                 var newWorkbook = newDocument.AddWorkbookPart();
+
                 newWorkbook.AddNewPart<WorkbookStylesPart>("rId4");
                 var stringTablePart = newWorkbook.AddNewPart<SharedStringTablePart>("rId5");
                 var sharedStringPartGenerator = new WorkbookSharedStringPartGenerator();
                 sharedStringPartGenerator.CreateSharedStringTablePart(stringTablePart);
-
-
+                
                 newWorkbook.Workbook = new Workbook();
+                var bookviews = GenerateBookViews();
+                newWorkbook.Workbook.Append(bookviews);
                 newWorkbook.Workbook.Append(new Sheets());
 
                 IEnumerable<Sheet> sheetsWithName = spreadsheetDocument.WorkbookPart.Workbook.Descendants<Sheet>()
@@ -271,13 +267,21 @@ namespace OpenXMLTools
                 OpenXmlPart rawData = spreadsheetDocument.WorkbookPart.GetPartById(sheetId);
 
                 var rawDataPart = newWorkbook.AddPart(rawData, "rId1");
-
-
+                
                 var sheets = newWorkbook.Workbook.Sheets;                
                 Sheet rawDataSheet = new Sheet() { Name = "RAW Data_all", SheetId = 1, Id = newWorkbook.GetIdOfPart(rawDataPart) };
-                sheets.Append(rawDataSheet);               
-
+                sheets.Append(rawDataSheet);                               
             }
+        }
+
+        // Creates an BookViews instance and adds its children.
+        static public BookViews GenerateBookViews()
+        {
+            BookViews bookViews1 = new BookViews();
+            WorkbookView workbookView1 = new WorkbookView() { XWindow = 0, YWindow = 0, WindowWidth = (UInt32Value)20310U, WindowHeight = (UInt32Value)9540U };
+
+            bookViews1.Append(workbookView1);
+            return bookViews1;
         }
     }
 }
