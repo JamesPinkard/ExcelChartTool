@@ -116,6 +116,7 @@
     <Compile Include="WorkbookHandler.cs" />
     <Compile Include="RecordProcessor.cs" />
     <Compile Include="CumulativeRecords\WeekCumulativeRecord.cs" />
+    <Compile Include="WorkbookSharedStringPartGenerator.cs" />
     <Compile Include="WorkbookStylesPartGenerator.cs" />
     <Compile Include="WorkbookWriter.cs" />
     <Compile Include="WorksheetFormatter.cs" />

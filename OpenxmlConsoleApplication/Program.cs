@@ -24,7 +24,7 @@ namespace OpenxmlConsoleApplication
         static void Main(string[] args)
         {
             var reportGenerator = new ReportGenerator();
-            reportGenerator.GenerateReport();
+            reportGenerator.GenerateReport(@".\O&M_TestSheet.xlsx");
         }
 
         private static void TestReportGeneration()

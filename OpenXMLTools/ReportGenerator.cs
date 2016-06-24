@@ -13,20 +13,37 @@ namespace OpenXMLTools
 {
     public class ReportGenerator
     {
-        public void GenerateReport()
-        {
-            string origDocName = @".\O&M_Master Spreadsheet_Q1 2016.xlsx";
-            string docName = @".\O&M_TestSheet.xlsx";
+        public void GenerateReport(string docName)
+        {           
+            
             string sumChartSheetName = @"SumVol";
             string ratesChartSheetName = @"WeeklyFlowRates";
             string newDocumentName = @".\O&M_Copy.xlsx";
             string rawRPWSheetName = @"RAW Data_all";
 
-            CopyWorkbook(docName, newDocumentName);
+            CopySheet(docName, newDocumentName);
 
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(newDocumentName, true))
             {
                 var workbookPart = spreadsheetDocument.WorkbookPart;
+
+                string cumulativeChartId = "rId6";
+                var cumulativeChart = workbookPart.AddNewPart<ChartsheetPart>(cumulativeChartId);
+                CumulativeVolumeChartGenerator cumulativeVolumeChartGenerator = new CumulativeVolumeChartGenerator();
+                var sheets = workbookPart.Workbook.Sheets;
+                var sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
+                Sheet cumulativeVolumeChartSheet = new Sheet() { Name = "SumVol", SheetId = sheetId, Id = workbookPart.GetIdOfPart(cumulativeChart) };
+                workbookPart.Workbook.Sheets.Append(cumulativeVolumeChartSheet);
+                cumulativeVolumeChartGenerator.CreateChartsheetPart(cumulativeChart);
+
+                string flowChartId = "rId7";
+                var flowRateChart = workbookPart.AddNewPart<ChartsheetPart>(flowChartId);                
+                FlowRateChartGenerator flowRateChartGenerator = new FlowRateChartGenerator();                
+                sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
+                Sheet flowRateSheet = new Sheet() { Name = "WeeklyFlowRates", SheetId = sheetId, Id = workbookPart.GetIdOfPart(flowRateChart) };                
+                workbookPart.Workbook.Sheets.Append(flowRateSheet);
+                flowRateChartGenerator.CreateChartsheetPart(flowRateChart);
+
                 var stylePartGenerator = new WorkbookStylesPartGenerator(workbookPart);
                 stylePartGenerator.CreateWorkbookStylesPart();
                 var workbookHandler = new WorkbookHandler(workbookPart);
@@ -229,6 +246,37 @@ namespace OpenXMLTools
                 {
                     newDocument.AddPart(part.OpenXmlPart, part.RelationshipId);
                 }
+            }
+        }
+
+        private static void CopySheet(string docName, string newDocumentName)
+        {
+            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(docName, false))
+            using (SpreadsheetDocument newDocument = SpreadsheetDocument.Create(newDocumentName, SpreadsheetDocumentType.Workbook))
+            {
+                var newWorkbook = newDocument.AddWorkbookPart();
+                newWorkbook.AddNewPart<WorkbookStylesPart>("rId4");
+                var stringTablePart = newWorkbook.AddNewPart<SharedStringTablePart>("rId5");
+                var sharedStringPartGenerator = new WorkbookSharedStringPartGenerator();
+                sharedStringPartGenerator.CreateSharedStringTablePart(stringTablePart);
+
+
+                newWorkbook.Workbook = new Workbook();
+                newWorkbook.Workbook.Append(new Sheets());
+
+                IEnumerable<Sheet> sheetsWithName = spreadsheetDocument.WorkbookPart.Workbook.Descendants<Sheet>()
+                    .Where(s => s.Name == "RAW Data_all");
+                Sheet foundSheet = sheetsWithName.First();
+                string sheetId = foundSheet.Id;
+                OpenXmlPart rawData = spreadsheetDocument.WorkbookPart.GetPartById(sheetId);
+
+                var rawDataPart = newWorkbook.AddPart(rawData, "rId1");
+
+
+                var sheets = newWorkbook.Workbook.Sheets;                
+                Sheet rawDataSheet = new Sheet() { Name = "RAW Data_all", SheetId = 1, Id = newWorkbook.GetIdOfPart(rawDataPart) };
+                sheets.Append(rawDataSheet);               
+
             }
         }
     }
