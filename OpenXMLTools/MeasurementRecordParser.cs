@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace OpenXMLTools
 {
-    class MeasurementRecordParserSwap
+    class MeasurementRecordParser
     {
-        public MeasurementRecordParserSwap(MountainViewField previousField)
+        public MeasurementRecordParser(MountainViewField previousField)
         {
             _previousField = previousField;
         }
 
         public IEnumerable<MeasurementRecord> ProcessMeasurementRecord(QuarterTable quarter)
-        {
+        {            
             List<MeasurementRecord> records = new List<MeasurementRecord>();
             var uniqueWeekFieldQuery = new UniqueWeekFieldQuery();
 
@@ -68,12 +68,15 @@ namespace OpenXMLTools
             var stationName = field.StationName;
             var measureTime = field.MeasureTime;
             var totalizerReading = field.TotalizerReading;
-            var cumulativeTime = measureTime - _previousField.MeasureTime;
-            var cumulativeFlow = totalizerReading - _previousField.TotalizerReading;
-            var measurementRecord = new IndividualMeasurementRecord(stationName, measureTime, totalizerReading, cumulativeTime.TotalMinutes, cumulativeFlow);
+            _cumulativeTime += (measureTime - _previousField.MeasureTime).TotalMinutes;
+            _cumulativeFlow += totalizerReading - _previousField.TotalizerReading;
+            var measurementRecord = new IndividualMeasurementRecord(stationName, measureTime, totalizerReading, _cumulativeTime, _cumulativeFlow);
             return measurementRecord;
         }
 
         private MountainViewField _previousField;
+        private double _cumulativeTime = 0;
+        private int _cumulativeFlow = 0;
+
     }
 }

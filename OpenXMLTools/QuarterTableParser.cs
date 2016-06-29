@@ -28,10 +28,14 @@ namespace OpenXMLTools
                 }
                 else
                 {
-                    ResetQuarterState();
-                    var fieldDict = new FieldWeekDictionary(quarterFields);
-                    quarterTables.Add(new QuarterTable(fieldDict, _previousField));
-                    _previousField = quarterFields.Last();
+                    ResetQuarterState();                    
+                    if (quarterFields.Count > 0)
+                    {
+                        FindValidQuarterState(field);
+                        var fieldDict = new FieldWeekDictionary(quarterFields);
+                        quarterTables.Add(new QuarterTable(fieldDict, _previousField));
+                        _previousField = quarterFields.Last();
+                    }
                     quarterFields = new List<MountainViewField>();
                     quarterFields.Add(field);
                 }
@@ -49,6 +53,14 @@ namespace OpenXMLTools
             return quarterTables;
         }
 
+        private void FindValidQuarterState(MountainViewField field)
+        {
+            while (!_quarterState.VerifyQuarter(field))
+            {
+                ResetQuarterState();
+            }
+        }
+
         private void ResetQuarterState()
         {
             _quarterState = _quarterState.NextQuarter();
@@ -58,7 +70,6 @@ namespace OpenXMLTools
         {
             _quarterState = _originalState;
         }
-
         private IQuarterState _quarterState;
         private IQuarterState _originalState;
         private MountainViewField _previousField;

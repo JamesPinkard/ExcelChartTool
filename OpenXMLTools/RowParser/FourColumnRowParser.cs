@@ -16,7 +16,11 @@ namespace OpenXMLTools
 
         public bool ValidateElementCount(Row row)
         {
-            return row.ChildElements.Count >= 4;
+            var rowCells = row.ChildElements.OfType<Cell>().OrderBy(c => c.CellReference.Value);
+            var cellReferences = rowCells.Select(c => c.CellReference.Value[0]);
+            var result = cellReferences.Take(4).SequenceEqual("ABCD");
+            return result;
+            //return row.ChildElements.Count >= 4;
         }
         
         public string ParseStationFromRow(Row row)

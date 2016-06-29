@@ -39,7 +39,7 @@ namespace OpenXMLTools
 
         public override string ToString()
         {
-            return string.Format("Reading({0}, {1}, {2})", StationName, MeasureTime, TotalizerReading);
+            return string.Format("({0}, {1}, {2})", StationName, MeasureTime, TotalizerReading);
         }
     }
 }

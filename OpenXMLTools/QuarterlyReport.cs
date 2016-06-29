@@ -25,7 +25,7 @@ namespace OpenXMLTools
                 var stationFields = stationTable.GetStationFields();
                 var quarterlyParser = new QuarterTableParser(new ThirdQuarterState());
                 var quarterTables = quarterlyParser.Parse(stationFields);
-                var parser = new MeasurementRecordParserSwap(stationFields.First());                    
+                var parser = new MeasurementRecordParser(stationFields.First());                    
                 foreach (var quarter in quarterTables)
                 {
                     var records = parser.ProcessMeasurementRecord(quarter);

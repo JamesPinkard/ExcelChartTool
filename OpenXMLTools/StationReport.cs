@@ -25,7 +25,7 @@ namespace OpenXMLTools
                 var stationFields = stationTable.GetStationFields();
                 var weeks = _uniqueWeekFieldQuery.GetUniqueWeekIndices(stationFields);
                 var firstField = stationFields.First();
-                var parser = new MeasurementRecordParserSwap(firstField);
+                var parser = new MeasurementRecordParser(firstField);
 
                 foreach (var week in weeks)
                 {

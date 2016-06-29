@@ -56,17 +56,18 @@ namespace OpenXMLTools
 
                 var fieldProcessor = new FieldProcessor(rowTable, parser);
                 var rawFields = fieldProcessor.ProcessFields();
-
+                var readingErrorLogger = new ReadingErrorLogger();
+                readingErrorLogger.Log(rawFields);
                 var extractionWellModifier = new ExtractionWellFieldModifier();
                 var fields = extractionWellModifier.Modify(rawFields);
-
                 var stationTableParser = new StationTableParser();
 
                 // Process influent data;
                 var influentquarterParser = new QuarterTableParser(new ThirdQuarterState());
                 var influentRecordParser = new QuarterRecordParser(influentquarterParser, "Influent");
                 var influentRecordQuery = new StationTableRecordQuery(stationTableParser, influentRecordParser);
-                var influentFieldFilter = new StationNameFieldFilter(new List<string>() { "RPW-06", "RPW-07" });
+                var influentStationNameFilter = new StationNameFieldFilter(new List<string>() { "RPW-06", "RPW-07" });
+                var influentFieldFilter = new ReplacementFieldFilter(influentStationNameFilter, @"RPW-6/7");
                 var influentRecordProcessor = new RecordProcessor(fields, influentRecordQuery, influentFieldFilter);
                 var influentRecords = influentRecordProcessor.ProcessRecords();
 
@@ -251,9 +252,9 @@ namespace OpenXMLTools
                 var newWorkbook = newDocument.AddWorkbookPart();
 
                 newWorkbook.AddNewPart<WorkbookStylesPart>("rId4");
-                var stringTablePart = newWorkbook.AddNewPart<SharedStringTablePart>("rId5");
-                var sharedStringPartGenerator = new WorkbookSharedStringPartGenerator();
-                sharedStringPartGenerator.CreateSharedStringTablePart(stringTablePart);
+                var stringTablePart = spreadsheetDocument.WorkbookPart.SharedStringTablePart;
+                newWorkbook.AddPart(stringTablePart, "rId5");                
+                
                 
                 newWorkbook.Workbook = new Workbook();
                 var bookviews = GenerateBookViews();
