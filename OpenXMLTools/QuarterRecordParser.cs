@@ -8,10 +8,10 @@ namespace OpenXMLTools
 {
     public class QuarterRecordParser : IRecordParser
     {
-        public QuarterRecordParser(QuarterTableParser quarterTableParser, string name)
+        public QuarterRecordParser(QuarterTableParser quarterTableParser, string stationName)
         {
             _quarterTableParser = quarterTableParser;
-            _name = name;
+            _stationName = stationName;
         }
 
         // Same as WeekRecordParser
@@ -43,7 +43,7 @@ namespace OpenXMLTools
                 }
                 cumalativeVolume += volumeOfTheWeek.Sum();
                 var weekRecord = new WeekCumulativeRecord(week, ratesOfTheWeek.Sum(), cumalativeVolume, volumeOfTheWeek.Sum());
-                var namedRecord = new NamedCumulativeRecord(weekRecord, _name);
+                var namedRecord = new NamedCumulativeRecord(weekRecord, _stationName);
                 weekRecords.Add(namedRecord);
             }
 
@@ -82,11 +82,32 @@ namespace OpenXMLTools
                     index = weekRecords.IndexOf(firstWeekOfQuarter.First()) + 1;
                     firstMeasurementOfQuarter = weekRecords[index];
                 }
+                var tablesForYearlyQuarter = stationQuarterTables.Where(t => qtable.GetFields().Contains(t.GetFields().First()));
+                var tableGroupings = tablesForYearlyQuarter.GroupBy(t => t.GetFields().First().StationName);
+                var stationNames = tableGroupings.Select(g => g.Key);
 
-                var quarterFlows = stationQuarterTables.Where(t => qtable.GetFields().Contains(t.GetFields().First()))
-                    .Select(r => r.GetAverageWeeklyFlowRate());
+                //var influentNames = new List<string>() { "RPW-06", "RPW-07", "RPW-6/7" };
+                var influentNames = new List<string>() { "RPW-06", "RPW-07", "Influent" };
 
-                var quarterCumulative = quarterFlows.Sum();                    
+                var containsAllInfluentWells = influentNames.Intersect(stationNames).Count() == influentNames.Count();
+                double quarterCumulative = 0;
+                
+                // Handles the transition quarter where RPW-6/7 is used instead of RPW-06 and RPW-7
+                if (containsAllInfluentWells)
+                {
+                    foreach (var tableGroup in tableGroupings)
+                    {
+                        var avgFlowRate = tableGroup.First().GetAverageWeeklyFlowRate();
+                        //if (tableGroup.Key == "RPW-6/7") { quarterCumulative += avgFlowRate * (5.0 / 13.0); }
+                        if (tableGroup.Key == "Influent") { quarterCumulative += avgFlowRate * (2.0 / 13.0); }
+                        else { quarterCumulative += avgFlowRate * (11.0 / 13.0); }
+                    }
+                }
+                else
+                {
+                    var quarterFlows = tablesForYearlyQuarter.Select(r => r.GetAverageWeeklyFlowRate());
+                    quarterCumulative = quarterFlows.Sum();                    
+                }
 
                 weekRecords[index] = new QuarterCumulativeRecord(firstMeasurementOfQuarter, quarterCumulative);
             }
@@ -95,6 +116,6 @@ namespace OpenXMLTools
         }
 
         private QuarterTableParser _quarterTableParser;
-        private string _name;
+        private string _stationName;
     }
 }

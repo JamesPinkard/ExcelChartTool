@@ -17,8 +17,12 @@ namespace OpenXMLTools
         public IEnumerable<MountainViewField> Filter(IEnumerable<MountainViewField> fields)
         {
             var filteredFields = _fieldFilter.Filter(fields);
+
+            // select the weeks that correspond to the replacement station name
             var replacementFields = fields.Where(f => f.StationName == _stationName);
             var replacedWeeks = replacementFields.Select(r => r.GetWeek());
+
+            // select the fields that do not correspond to the replacement station name
             var existingFields = filteredFields.Where(f => !replacedWeeks.Contains(f.GetWeek()));
             var fieldList = existingFields.ToList();
             fieldList.AddRange(replacementFields);

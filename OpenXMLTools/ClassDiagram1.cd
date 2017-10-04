@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OpenXMLTools.CellParser" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAgIAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CellParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.CellRange" Collapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAEAAAAAAAAAAAAAAAAIAwAAAI=</HashCode>
+      <FileName>CellRange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.CellReference" Collapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAgABEQABAAABAAAAAAAAAgAAAAAAAgAA=</HashCode>
+      <FileName>CellReference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.BarChartMediator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAKAEAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Charts\BarChartMediator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.BarChartSeriesFormatter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAgAAAAAAYAAAAAAAAAAAAABAAAAAAQA=</HashCode>
+      <FileName>Charts\BarChartSeriesFormatter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.ChartInserter" Collapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Charts\ChartInserter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ChartLibrary" Collapsed="true">
+    <Position X="20.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAIAgAAAAAAAAAABAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Charts\ChartLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ScatterChartMediator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAEAAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Charts\ScatterChartMediator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.ScatterChartSeriesFormatter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAgAAAAAAYAAAAAAAAAAAAABAAAAAAQA=</HashCode>
+      <FileName>Charts\ScatterChartSeriesFormatter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.CumulativeRecord" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAACAAAAAAAAIAACAIAAAAA=</HashCode>
+      <FileName>CumulativeRecords\CumulativeRecord.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenXMLTools.NamedCumulativeRecord" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAEAAEAAAAACAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>CumulativeRecords\NamedCumulativeRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.QuarterCumulativeRecord" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAEAAAAACAAAAAAAAAQAAAIAAAAA=</HashCode>
+      <FileName>CumulativeRecords\QuarterCumulativeRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WeekCumulativeRecord" Collapsed="true">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAGAEAAACAAAAAAAAAIAAAIAABAE=</HashCode>
+      <FileName>CumulativeRecords\WeekCumulativeRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.CumulativeVolumeChartGenerator" Collapsed="true">
+    <Position X="22" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIBCAAAAAAAEACAAAEABAAAQAAAACAAQAAAAA=</HashCode>
+      <FileName>CumulativeVolumeChartGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ExcelExtensionListGenerator" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcelExtensionListGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ExcelFilePropertiesGenerator" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcelFilePropertiesGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ExtractionWellFieldModifier" Collapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExtractionWellFieldModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.FieldMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>FieldMapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.FieldParserFactory" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FieldParserFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.FieldProcessor" Collapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAgAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FieldProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.FieldVerifier" Collapsed="true">
+    <Position X="20.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACABQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAIA=</HashCode>
+      <FileName>FieldVerifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.FieldWeekDictionary" Collapsed="true">
+    <Position X="22" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAEgAAAgCAAAAAAAAwAAAAAAAgQAgAgAAAQAAA=</HashCode>
+      <FileName>FieldWeekDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.FlowRateChartGenerator" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIBCAAAAAAAEAAAAAEABAAAQAAAACAAQAAAAA=</HashCode>
+      <FileName>FlowRateChartGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.IndividualMeasurementRecord" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAAAAAAAAAAAAUAAAAACAIAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MeasurementRecord\IndividualMeasurementRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.MeasurementRecord" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAACAAAAAAAAIAACAAAAAAA=</HashCode>
+      <FileName>MeasurementRecord\MeasurementRecord.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenXMLTools.QuarterMeasurementRecord" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAACAAAAAAAAAQAAAAAAAEA=</HashCode>
+      <FileName>MeasurementRecord\QuarterMeasurementRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WeekMeasurementRecord" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAECAAAEAAAAACAAAAAAAAAQAAAAAgAAA=</HashCode>
+      <FileName>MeasurementRecord\WeekMeasurementRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.MeasurementRecordParser" Collapsed="true">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAEAAAAAAAQAAAAAAAAAAABAgAAAAgAAA=</HashCode>
+      <FileName>MeasurementRecordParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.MountainViewField" Collapsed="true">
+    <Position X="15" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAAAAAAAAAAEAQAEAAIAgAAAAAAAAgAAAAAAAAE=</HashCode>
+      <FileName>MountainViewField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.QuarterlyReport" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAABBAAAAAAACAAAA=</HashCode>
+      <FileName>QuarterlyReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.QuarterRecordParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QuarterRecordParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.FirstQuarterState" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAE=</HashCode>
+      <FileName>QuarterState\FirstQuarterState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.FourthQuarterState" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAE=</HashCode>
+      <FileName>QuarterState\FourthQuarterState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.QuarterStateBase" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAE=</HashCode>
+      <FileName>QuarterState\QuarterStateBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OpenXMLTools.SecondQuarterState" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAE=</HashCode>
+      <FileName>QuarterState\SecondQuarterState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ThirdQuarterState" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAE=</HashCode>
+      <FileName>QuarterState\ThirdQuarterState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.QuarterTable" Collapsed="true">
+    <Position X="20.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAoAAAgAAAACAAAAQAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QuarterTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.QuarterTableParser" Collapsed="true">
+    <Position X="22" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAIAAAAAAAAAAAQAAIAAAAAACkAAAAAAAAAA=</HashCode>
+      <FileName>QuarterTableParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.RangeProcessor" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAEAAAEAAAAEAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>RangeProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ReadingErrorLogger" Collapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ReadingErrorLogger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.RecordProcessor" Collapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAAAACEAAAAAAAAAABAAAAAAAAIAAA=</HashCode>
+      <FileName>RecordProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.RecordByStation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAEAQIEAAAAAAAAAAAAIAACAIAAAAE=</HashCode>
+      <FileName>Records\RecordByStation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.RecordWriter" Collapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>RecordWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ReplacementFieldFilter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAABAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ReplacementFieldFilter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.ReportGenerator" Collapsed="true">
+    <Position X="20.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQICAAAAAAAAAAgABAgEAAAAIAABAAAAAAAEAAACA=</HashCode>
+      <FileName>ReportGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.FourColumnRowParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABAAACAAAAAAAAEAACAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>RowParser\FourColumnRowParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.ThreeColumnRowParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABAAAAAAAAAAAAEAACAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>RowParser\ThreeColumnRowParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.SheetDataWriter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABAAQAAAAAIAAFAAQAAAAAAAACAABAAAACkAAEgAA=</HashCode>
+      <FileName>SheetDataWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.SimpleFieldParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>SimpleFieldParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.SpreadsheetHelper" Collapsed="true">
+    <Position X="15" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAgIAkBAAAAAAAEAAAAAAAAAAAAAQgAAAAAAAA=</HashCode>
+      <FileName>SpreadsheetHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.StationNameFieldFilter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StationNameFieldFilter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.StationRecordParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StationRecordParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.StationReport" Collapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAABBAAAAAAACAAAA=</HashCode>
+      <FileName>StationReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.StationTable" Collapsed="true">
+    <Position X="22" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAABAgCAAAQQBAAQAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>StationTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.StationTableParser" Collapsed="true">
+    <Position X="9.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StationTableParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.StationTableRecordQuery" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAABCAAAA=</HashCode>
+      <FileName>StationTableRecordQuery.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.Table2aGenerator" Collapsed="true">
+    <Position X="13.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAARAAmAAAAAAACAAAAAAAARbACACAICBAQCBAgA=</HashCode>
+      <FileName>Table2aGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.Table2bGenerator" Collapsed="true">
+    <Position X="15" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAARAAmAAAAAAACAAAAAAAARbACACAICBAQCBAgA=</HashCode>
+      <FileName>Table2bGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.ThemeGenerator" Collapsed="true">
+    <Position X="16.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ThemeGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.UniqueWeekFieldQuery" Collapsed="true">
+    <Position X="20.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UniqueWeekFieldQuery.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WeekRecordParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WeekRecordParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.WeekTable" Collapsed="true">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEEAAAAAAACAAAACAAAAAkAAAQAgAAAAAAAAAAAA=</HashCode>
+      <FileName>WeekTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WorkbookHandler" Collapsed="true">
+    <Position X="11.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAEBAAAAAAAEAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>WorkbookHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WorkbookSharedStringPartGenerator" Collapsed="true">
+    <Position X="13.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WorkbookSharedStringPartGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WorkbookStylesPartGenerator" Collapsed="true">
+    <Position X="15" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAMAAA=</HashCode>
+      <FileName>WorkbookStylesPartGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WorkbookWriter" Collapsed="true">
+    <Position X="16.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAgAAAAAAAAAgAAAAAAAAAAAAAAAAgAAAAEAAA=</HashCode>
+      <FileName>WorkbookWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WorksheetFormatter" Collapsed="true">
+    <Position X="18.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQIAAABAAAAAAAgAAAAAAAAAABAAAAAAAAIgAA=</HashCode>
+      <FileName>WorksheetFormatter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WorksheetRange" Collapsed="true">
+    <Position X="20.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAEQAAIAAAAAAACAAAAAAA=</HashCode>
+      <FileName>WorksheetRange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenXMLTools.WorksheetRowTable" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>WorksheetRowTable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OpenXMLTools.WorksheetWriter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEBAAQAAAAAIAAFAAQAAAAAAAACAABAAAACkAAEgIA=</HashCode>
+      <FileName>WorksheetWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="OpenXMLTools.IChartMediator" Collapsed="true">
+    <Position X="9.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Charts\IChartMediator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IFieldFilter" Collapsed="true">
+    <Position X="11.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IFieldFilter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IFieldMapper" Collapsed="true">
+    <Position X="13.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IFieldParser" Collapsed="true">
+    <Position X="15" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IFieldParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IRecordParser" Collapsed="true">
+    <Position X="20.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IRecordParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IRecordQuery" Collapsed="true">
+    <Position X="22" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>IRecordQuery.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IRecordWriter" Collapsed="true">
+    <Position X="9.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAgAAAgAA=</HashCode>
+      <FileName>IRecordWriter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IRowTable" Collapsed="true">
+    <Position X="13.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IRowTable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.ISeriesFormatter" Collapsed="true">
+    <Position X="15" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>ISeriesFormatter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IQuarterState" Collapsed="true">
+    <Position X="16.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>QuarterState\IQuarterState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IRecord" Collapsed="true">
+    <Position X="18.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAACAAAAAAA=</HashCode>
+      <FileName>Records\IRecord.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenXMLTools.IRowParser" Collapsed="true">
+    <Position X="11.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABAAAAAAAAAAAAEAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RowParser\IRowParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

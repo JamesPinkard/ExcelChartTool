@@ -20,6 +20,7 @@ namespace OpenXMLTools
 
         public IEnumerable<MountainViewField> Filter(IEnumerable<MountainViewField> fields)
         {
+            // Get all fields that belong to stations listed in station names
             var filteredFields = fields.Where(f => _stationNames.Contains(f.StationName));
             return filteredFields;
         }

@@ -27,15 +27,17 @@ namespace OpenXMLTools
             {
                 var workbookPart = spreadsheetDocument.WorkbookPart;
 
+                // create cumulative volume chartsheet part
                 string cumulativeChartId = "rId6";
                 var cumulativeChart = workbookPart.AddNewPart<ChartsheetPart>(cumulativeChartId);
-                CumulativeVolumeChartGenerator cumulativeVolumeChartGenerator = new CumulativeVolumeChartGenerator();
+                var cumulativeVolumeChartGenerator = new CumulativeVolumeChartGenerator();
                 var sheets = workbookPart.Workbook.Sheets;
                 var sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
-                Sheet cumulativeVolumeChartSheet = new Sheet() { Name = "SumVol", SheetId = sheetId, Id = workbookPart.GetIdOfPart(cumulativeChart) };
+                var  cumulativeVolumeChartSheet = new Sheet() { Name = "SumVol", SheetId = sheetId, Id = workbookPart.GetIdOfPart(cumulativeChart) };
                 workbookPart.Workbook.Sheets.Append(cumulativeVolumeChartSheet);
                 cumulativeVolumeChartGenerator.CreateChartsheetPart(cumulativeChart);
 
+                // create flow rate chartsheet part
                 string flowChartId = "rId7";
                 var flowRateChart = workbookPart.AddNewPart<ChartsheetPart>(flowChartId);                
                 FlowRateChartGenerator flowRateChartGenerator = new FlowRateChartGenerator();                
@@ -44,30 +46,36 @@ namespace OpenXMLTools
                 workbookPart.Workbook.Sheets.Append(flowRateSheet);
                 flowRateChartGenerator.CreateChartsheetPart(flowRateChart);
 
+                // create worksheet row table
                 var stylePartGenerator = new WorkbookStylesPartGenerator(workbookPart);
                 stylePartGenerator.CreateWorkbookStylesPart();
                 var workbookHandler = new WorkbookHandler(workbookPart);
                 var worksheet = workbookHandler.GetWorksheet(rawRPWSheetName);
                 var rowTable = new WorksheetRowTable(worksheet);
 
+                // create field parser
                 var sharedStringList = workbookHandler.GetSharedStringList();
                 var parserFacory = new FieldParserFactory(sharedStringList);
                 var parser = parserFacory.MakeParser();
 
+                // parse extraction well fields
                 var fieldProcessor = new FieldProcessor(rowTable, parser);
                 var rawFields = fieldProcessor.ProcessFields();
                 var readingErrorLogger = new ReadingErrorLogger();
                 readingErrorLogger.Log(rawFields);
                 var extractionWellModifier = new ExtractionWellFieldModifier();
                 var fields = extractionWellModifier.Modify(rawFields);
-                var stationTableParser = new StationTableParser();
 
                 // Process influent data;
+                var stationTableParser = new StationTableParser();
                 var influentquarterParser = new QuarterTableParser(new ThirdQuarterState());
                 var influentRecordParser = new QuarterRecordParser(influentquarterParser, "Influent");
                 var influentRecordQuery = new StationTableRecordQuery(stationTableParser, influentRecordParser);
+
                 var influentStationNameFilter = new StationNameFieldFilter(new List<string>() { "RPW-06", "RPW-07" });
-                var influentFieldFilter = new ReplacementFieldFilter(influentStationNameFilter, @"RPW-6/7");
+                //var influentFieldFilter = new ReplacementFieldFilter(influentStationNameFilter, @"RPW-6/7");
+                var influentFieldFilter = new ReplacementFieldFilter(influentStationNameFilter, @"Influent");
+
                 var influentRecordProcessor = new RecordProcessor(fields, influentRecordQuery, influentFieldFilter);
                 var influentRecords = influentRecordProcessor.ProcessRecords();
 
@@ -75,7 +83,10 @@ namespace OpenXMLTools
                 var quarterParser = new QuarterTableParser(new ThirdQuarterState());
                 var effluentRecordParser = new QuarterRecordParser(quarterParser, "Effluent");
                 var recordQuery = new StationTableRecordQuery(stationTableParser, effluentRecordParser);
-                var effluentFieldFilter = new StationNameFieldFilter("RPW-03");
+                
+                //var effluentFieldFilter = new StationNameFieldFilter("RPW-03");
+                var effluentFieldFilter = new StationNameFieldFilter("Effluent");
+
                 var effluentrecordProcessor = new RecordProcessor(fields, recordQuery, effluentFieldFilter);
                 var records = effluentrecordProcessor.ProcessRecords();
 

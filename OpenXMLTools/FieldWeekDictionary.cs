@@ -19,8 +19,7 @@ namespace OpenXMLTools
             foreach (var f in fields)
             {
                 AddField(f);
-            }
-            
+            }            
         }
 
         public void AddField(MountainViewField field)
@@ -40,6 +39,11 @@ namespace OpenXMLTools
         public bool Contains(int weekIndex)
         {
             return _weeklyMeasurements.ContainsKey(weekIndex);
+        }
+
+        public int Count()
+        {
+            return _weeklyMeasurements.Count;
         }
 
         public WeekTable GetTableForWeek(int weekIndex)
