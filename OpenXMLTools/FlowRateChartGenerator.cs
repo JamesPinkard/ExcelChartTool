@@ -9,10 +9,10 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace OpenXMLTools
 {
-    class FlowRateChartGenerator
+    class FlowRateChartGenerator : IChartsheetPartBuilder
     {
         // Adds child parts and generates content of the specified part.
-        public void CreateChartsheetPart(ChartsheetPart part)
+        public void BuildSheetPart(ChartsheetPart part)
         {
             DrawingsPart drawingsPart1 = part.AddNewPart<DrawingsPart>("rId2");
             GenerateDrawingsPart1Content(drawingsPart1);

@@ -10,10 +10,11 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace OpenXMLTools
 {
-    class CumulativeVolumeChartGenerator
+    class CumulativeVolumeChartGenerator: IChartsheetPartBuilder
     {
+
         // Adds child parts and generates content of the specified part.
-        public void CreateChartsheetPart(ChartsheetPart part)
+        public void BuildSheetPart(ChartsheetPart part)
         {
             DrawingsPart drawingsPart1 = part.AddNewPart<DrawingsPart>("rId2");
             GenerateDrawingsPart1Content(drawingsPart1);
@@ -34,7 +35,6 @@ namespace OpenXMLTools
             GenerateSpreadsheetPrinterSettingsPart1Content(spreadsheetPrinterSettingsPart1);
 
             GeneratePartContent(part);
-
         }
 
         // Generates content of drawingsPart1.

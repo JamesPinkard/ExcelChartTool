@@ -62,6 +62,8 @@
     <Compile Include="FieldParserFactory.cs" />
     <Compile Include="FieldWeekDictionary.cs" />
     <Compile Include="FlowRateChartGenerator.cs" />
+    <Compile Include="IChartsheetPartBuilder.cs" />
+    <Compile Include="OpenXmlPartGenerator.cs" />
     <Compile Include="ReadingErrorLogger.cs" />
     <Compile Include="IRecordWriter.cs" />
     <Compile Include="MeasurementRecordParser.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="ReplacementFieldFilter.cs" />
     <Compile Include="ReportGenerator.cs" />
     <Compile Include="SheetDataWriter.cs" />
+    <Compile Include="SheetGenerator.cs" />
     <Compile Include="StationNameFieldFilter.cs" />
     <Compile Include="StationReport.cs" />
     <Compile Include="StationTableParser.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="WeekRecordParser.cs" />
     <Compile Include="WeekTable.cs" />
     <Compile Include="ThemeGenerator.cs" />
+    <Compile Include="WellTotalizerAdjuster.cs" />
     <Compile Include="WorkbookHandler.cs" />
     <Compile Include="RecordProcessor.cs" />
     <Compile Include="CumulativeRecords\WeekCumulativeRecord.cs" />
@@ -125,6 +129,7 @@
     <Compile Include="WorkbookStylesPartGenerator.cs" />
     <Compile Include="WorkbookWriter.cs" />
     <Compile Include="WorksheetFormatter.cs" />
+    <Compile Include="ChartsheetMaker.cs" />
     <Compile Include="WorksheetRange.cs" />
     <Compile Include="WorksheetRowTable.cs" />
     <Compile Include="WorksheetWriter.cs" />

@@ -1,6 +1,7 @@
 lower reading than previous-(RPW-06, 2/27/2017 10:44:00 AM, 6357570) vs (RPW-06, 3/3/2017 9:04:00 AM, 3706620)
 lower reading than previous-(RPW-06, 5/5/2017 8:25:00 AM, 4329230) vs (RPW-06, 5/15/2017 10:59:00 AM, 4305460)
 lower reading than previous-(Effluent, 2/3/2017 8:12:00 AM, 5862300) vs (Effluent, 2/6/2017 9:27:00 AM, 591470)
+lower reading than previous-(Effluent, 3/31/2017 9:20:00 AM, 6779470) vs (Effluent, 4/3/2017 10:33:00 AM, 6328420)
 lower reading than previous-(EW-06, 3/27/2017 10:22:00 AM, 965249) vs (EW-06, 3/31/2017 11:24:00 AM, 960530)
 lower reading than previous-(EW-06, 4/26/2017 12:27:00 PM, 999091) vs (EW-06, 5/1/2017 11:10:00 AM, 4547)
 lower reading than previous-(EW-07, 11/29/2016 9:17:00 AM, 995930) vs (EW-07, 12/12/2016 10:15:00 AM, 9512)

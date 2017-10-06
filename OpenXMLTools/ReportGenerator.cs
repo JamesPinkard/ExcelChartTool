@@ -28,23 +28,17 @@ namespace OpenXMLTools
                 var workbookPart = spreadsheetDocument.WorkbookPart;
 
                 // create cumulative volume chartsheet part
-                string cumulativeChartId = "rId6";
-                var cumulativeChart = workbookPart.AddNewPart<ChartsheetPart>(cumulativeChartId);
-                var cumulativeVolumeChartGenerator = new CumulativeVolumeChartGenerator();
                 var sheets = workbookPart.Workbook.Sheets;
-                var sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
-                var  cumulativeVolumeChartSheet = new Sheet() { Name = "SumVol", SheetId = sheetId, Id = workbookPart.GetIdOfPart(cumulativeChart) };
-                workbookPart.Workbook.Sheets.Append(cumulativeVolumeChartSheet);
-                cumulativeVolumeChartGenerator.CreateChartsheetPart(cumulativeChart);
-
+                var sheetGenerator = new SheetGenerator(sheets);
+                var openXmlPartGenerator = new OpenXmlPartGenerator(workbookPart);
+                var cumulativeVolumeChartGenerator = new CumulativeVolumeChartGenerator();
+                var cumalativeChartsheetMaker = new ChartsheetMaker(sheetGenerator, openXmlPartGenerator, cumulativeVolumeChartGenerator);
+                cumalativeChartsheetMaker.MakeChartSheet("SumVol", "rId6");            
+                                
                 // create flow rate chartsheet part
-                string flowChartId = "rId7";
-                var flowRateChart = workbookPart.AddNewPart<ChartsheetPart>(flowChartId);                
                 FlowRateChartGenerator flowRateChartGenerator = new FlowRateChartGenerator();                
-                sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
-                Sheet flowRateSheet = new Sheet() { Name = "WeeklyFlowRates", SheetId = sheetId, Id = workbookPart.GetIdOfPart(flowRateChart) };                
-                workbookPart.Workbook.Sheets.Append(flowRateSheet);
-                flowRateChartGenerator.CreateChartsheetPart(flowRateChart);
+                var flowRateChartsheetMaker = new ChartsheetMaker(sheetGenerator, openXmlPartGenerator, flowRateChartGenerator);
+                flowRateChartsheetMaker.MakeChartSheet("WeeklyFlowRates", "rId7");
 
                 // create worksheet row table
                 var stylePartGenerator = new WorkbookStylesPartGenerator(workbookPart);
@@ -63,6 +57,8 @@ namespace OpenXMLTools
                 var rawFields = fieldProcessor.ProcessFields();
                 var readingErrorLogger = new ReadingErrorLogger();
                 readingErrorLogger.Log(rawFields);
+                var totalizerAdjuster = new WellTotalizerAdjuster();
+                totalizerAdjuster.AdjustReading(rawFields, "Effluent", DateTime.Parse("4/1/2017"), 516600);
                 var extractionWellModifier = new ExtractionWellFieldModifier();
                 var fields = extractionWellModifier.Modify(rawFields);
 
